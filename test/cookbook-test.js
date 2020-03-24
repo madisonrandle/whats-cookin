@@ -1,4 +1,5 @@
-// import {expect} from 'chai';
+import {expect} from 'chai';
+
 const chai = require('chai');
 const expect = chai.expect;
 
@@ -68,23 +69,21 @@ describe('Cookbhook', () => {
     });
   })
   describe('Cookbook Methods', () => {
-    it('should have an array of all ingredients', () => {
-      expect(cookbook.ingredientData).to.be.an('array');
+
+    it('should be able to filter through the array by ingredients', () => {
+      expect(cookbook.findRecipe('ingredient')).to.equal();
     });
 
-    it('should have an ID for each ingredient', () => {
-      expect(cookbook.ingredientData[0].id).to.equal()
+    it('should be able to filter through the array by name', () => {
+      expect(cookbook.findRecipe('title').length).to.equal(1);
     });
 
-    it('should have an estimated cost in cents for each ingredient', () => {
-      expect(cookbook.ingredientData[0].estimatedCostInCents).to.equal();
-    });
+    it('should be able to calculate the cost for an ingredient', () => {
+      expect(cookbook.calculateCost(recipeData)).to.equal('$amount')
+    })
 
-    it('should have a name for each ingredient', () => {
-      expect(cookbook.ingredientData[0].name).to.equal()
-    });
-  })
-
+   
+  });
 })
 
 
