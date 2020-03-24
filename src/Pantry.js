@@ -1,6 +1,7 @@
-class Pantry {
-  constructor () {
-
+class Pantry extends Cookbook {
+  constructor (ingredientsData, recipesData, userPantry) {
+    super (ingredientsData, recipesData)
+    this.userPantry = userPantry;
   }
 }
 
@@ -8,3 +9,5 @@ class Pantry {
 if (typeof module !== 'undefined') {
   module.exports = Pantry;
 }
+
+// Pantry - canPantryCookSpecifiedMeal, determineIngredientSuppyForSpecificMeal
