@@ -30,12 +30,12 @@ This is one of our Pair Projects during our time at [Turing School of Software a
 ![Screen-Shot.png](home page link will go here)
 
 ## Animation
-### [specify] Page Animation
+### [specific app page] Animation
 ![project gif](gif link will go here)
 
 ![project gif](gif link will go here)
 
-### [specify] Page Animation
+### [specific app page] Animation
 ![project gif](gif link will go here)
 
 ![project gif](gif link will go here)
