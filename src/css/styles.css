@@ -68,10 +68,6 @@ h2,
   cursor: pointer;
 }
 
-.search-icon:focus {
-  /* outline: none; */
-}
-
 .recipe-search-input {
   border: none;
   border-radius: 50px;
