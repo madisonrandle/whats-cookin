@@ -3,6 +3,10 @@ class Cookbook {
     this.recipes = recipeData;
     this.ingredients = ingredientData;
   }
+
+  calculateCost() {
+    
+  }
   
 }
 
