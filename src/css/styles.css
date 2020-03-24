@@ -69,7 +69,7 @@ h2,
 }
 
 .search-icon:focus {
-  outline: none;
+  /* outline: none; */
 }
 
 .recipe-search-input {
@@ -127,8 +127,6 @@ main {
 /* RECIPE CARDS */
 .recipe-card {
   border: .1rem solid black;
-  height: 20rem;
-  width: 20rem;
 }
 
 .recipe-card-header {
@@ -148,24 +146,37 @@ main {
 
 .add-recipe-icon {
   background: url(../images/plus.svg);
+  background-size: cover;
+}
+
+.add-recipe-icon:hover {
+  background: url(../images/plusHover.svg);
+  transition:all .5s ease;
 }
 
 .favorite-recipe-icon-inactive {
   background: url(../images/inactiveFavorite.svg);
 }
 
+.favorite-recipe-icon-inactive:hover {
+  background: url(../images/favoriteHover.svg);
+}
+
 .favorite-recipe-icon-active {
   background: url(../images/activeFavorite.svg);
 }
 
-/* RECIPE IMAGE WILL GET INSERTED INTO THIS CLASS */
-/* SIZE IMAGE HERE */
+/* INTERPOLATE RECIPE IMAGE URL THIS CLASS */
 .recipe-card-main {
-
+  background: url(https://spoonacular.com/recipeImages/595736-556x370.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 15rem;
 }
 
 .recipe-card-main:hover {
-  cursor: pointer;
+  cursor: context-menu;
 }
 
 .recipe-name {
