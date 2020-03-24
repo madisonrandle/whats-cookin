@@ -1,0 +1,183 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  height: auto;
+  overflow: scroll;
+}
+
+/* HEADERS */
+.home-page-header {
+  align-items: center;
+  border-bottom: .1rem solid black;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 1.5rem;
+}
+
+.my-recipes {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+
+/* TITLE & USER'S NAME */
+.title-and-greeting-wrapper {
+  min-width: 15rem;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2,
+.recipe-name {
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+
+/* SEARCH INPUT & ICON IMAGE */
+.recipe-search-input-wrapper {
+  align-items: center;
+  border: .09rem solid black;
+  border-radius: 50px;
+  display: flex;
+  height: 3rem;
+  justify-content: space-between;
+  min-width: 20rem;
+}
+
+.search-icon {
+  background: url(../images/search.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  height: 2rem;
+  margin-left: 1rem;
+  width: 1.5rem;
+}
+
+.search-icon:hover,
+.add-recipe-icon,
+.favorite-recipe-icon-inactive,
+.favorite-recipe-icon-active {
+  cursor: pointer;
+}
+
+.recipe-search-input {
+  border: none;
+  border-radius: 50px;
+  font-size: 1.4rem;
+  padding-left: .5rem;
+  width: 25rem;
+}
+
+.recipe-search-input:focus {
+  outline: none;
+}
+
+.recipe-search-input:hover {
+  color: dimgrey;
+}
+
+/* NAV BUTTONS */
+.nav-buttons-wrapper,
+.my-recipes-nav-buttons-wrapper {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: flex-end;
+}
+
+.view-favorites-button,
+.home-button,
+.all-recipes-button,
+.pantry-button {
+  border: none;
+  font-size: 1.4rem;
+  margin-left: 2rem;
+}
+
+.all-recipes-button {
+  margin: 0;
+}
+
+.view-favorites-button:hover,
+.home-button:hover,
+.all-recipes-button:hover,
+.pantry-button:hover {
+  color: blue;
+  cursor: pointer;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 2rem;
+  padding: 2rem;
+}
+
+/* RECIPE CARDS */
+.recipe-card {
+  border: .1rem solid black;
+}
+
+.recipe-card-header {
+  border-bottom: .1rem solid black;
+  display: flex;
+  justify-content: space-between;
+  padding: .3rem;
+}
+
+.add-recipe-icon,
+.favorite-recipe-icon-inactive,
+.favorite-recipe-icon-active {
+  border: none;
+  height: 2rem;
+  min-width: 2rem;
+}
+
+.add-recipe-icon {
+  background: url(../images/plus.svg);
+  background-size: cover;
+}
+
+.add-recipe-icon:hover {
+  background: url(../images/plusHover.svg);
+  transition:all .5s ease;
+}
+
+.favorite-recipe-icon-inactive {
+  background: url(../images/inactiveFavorite.svg);
+}
+
+.favorite-recipe-icon-inactive:hover {
+  background: url(../images/favoriteHover.svg);
+}
+
+.favorite-recipe-icon-active {
+  background: url(../images/activeFavorite.svg);
+}
+
+/* INTERPOLATE RECIPE IMAGE URL THIS CLASS */
+.recipe-card-main {
+  background: url(https://spoonacular.com/recipeImages/595736-556x370.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 15rem;
+}
+
+.recipe-card-main:hover {
+  cursor: context-menu;
+}
+
+.recipe-name {
+  padding: .3rem;
+  text-align: center;
+}
+
+//
