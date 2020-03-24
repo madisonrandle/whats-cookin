@@ -82,6 +82,7 @@ h2,
 
 .recipe-search-input:hover {
   color: dimgrey;
+  transition:all .5s ease;
 }
 
 /* NAV BUTTONS */
@@ -109,7 +110,7 @@ h2,
 .home-button:hover,
 .all-recipes-button:hover,
 .pantry-button:hover {
-  color: blue;
+  color: #6AA1F9;
   cursor: pointer;
 }
 
@@ -156,10 +157,15 @@ main {
 
 .favorite-recipe-icon-inactive:hover {
   background: url(../images/favoriteHover.svg);
+  transition:all .5s ease;
 }
 
 .favorite-recipe-icon-active {
   background: url(../images/activeFavorite.svg);
+}
+
+.favorite-recipe-icon-active:hover {
+  opacity: 0.7;
 }
 
 /* INTERPOLATE RECIPE IMAGE URL THIS CLASS */
