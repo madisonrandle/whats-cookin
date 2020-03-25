@@ -1,6 +1,6 @@
 class Recipe {
   constructor() {
-    
+
   }
 }
 
@@ -9,3 +9,7 @@ class Recipe {
 if (typeof module !== 'undefined') {
   module.exports = Recipe;
 }
+
+
+
+// Recipe - getRecipeInstructions
