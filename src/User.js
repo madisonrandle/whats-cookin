@@ -1,7 +1,8 @@
 class User {
-  constructor (userData, favoriteRecipes) {
+  constructor (userData, favoriteRecipes, recipesToCook) {
     this.userData = userData;
     this.favoriteRecipes = [];
+    this.recipesToCook = [];
   }
 
   addRecipeToFavorites(recipe) {
@@ -11,6 +12,15 @@ class User {
   removeRecipeFromFavorites(recipe) {
     const i = this.favoriteRecipes.indexOf(recipe);
     this.favoriteRecipes.splice(i, 1)
+  }
+
+  saveRecipeToCook(recipe) {
+    !this.recipesToCook.includes(recipe) && this.recipesToCook.push(recipe);
+  }
+
+  removeRecipeToCook(recipe) {
+    const i = this.recipesToCook.indexOf(recipe);
+    this.recipesToCook.splice(i, 1)
   }
 
 }
