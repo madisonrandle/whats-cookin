@@ -4,11 +4,14 @@ class User {
     this.favoriteRecipes = [];
   }
 
-  // add to / remove from the user’s favoriteRecipes
-  addToFavorites(recipe) {
+  addRecipeToFavorites(recipe) {
     !this.favoriteRecipes.includes(recipe) && this.favoriteRecipes.push(recipe);
   }
 
+  removeRecipeFromFavorites(recipe) {
+    const i = this.favoriteRecipes.indexOf(recipe);
+    this.favoriteRecipes.splice(i, 1)
+  }
 
 }
 
