@@ -4,7 +4,11 @@ class Cookbook {
     this.ingredients = ingredientData;
   }
 
-  calculateCost() {
+  calculateCost(recipes) {
+
+  }
+
+  findRecipe(searchTerm) {
     
   }
   
