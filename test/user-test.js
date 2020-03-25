@@ -37,10 +37,13 @@ describe.only('User', () => {
     expect(user.favoriteRecipes).to.have.lengthOf(0);
   });
 
-  it('Should store an object in an array when a user favorites a recipe', () =>{
-    user.addToFavorites(recipesData[0]);
-    expect(user.favoriteRecipes).to.deep.equal([recipesData[0]]);
-    user.addToFavorites(recipesData[1]);
-    expect(user.favoriteRecipes).to.deep.equal([recipesData[0], recipesData[1]]);
+  it('Should add and remove objects from an array of favorite recipes', () => {
+  user.addRecipeToFavorites(recipesData[0]);
+  user.addRecipeToFavorites(recipesData[1]);
+
+  expect(user.favoriteRecipes).to.deep.equal([recipesData[0], recipesData[1]]);
+
+  user.removeRecipeFromFavorites(recipesData[0]);
+  expect(user.favoriteRecipes).to.deep.equal([recipesData[1]]);
   });
 });
