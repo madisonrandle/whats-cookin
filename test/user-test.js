@@ -46,4 +46,19 @@ describe.only('User', () => {
   user.removeRecipeFromFavorites(recipesData[0]);
   expect(user.favoriteRecipes).to.deep.equal([recipesData[1]]);
   });
+
+  it('Should store a list of saved recipes', () => {
+    expect(user.recipesToCook).to.be.a('array');
+    expect(user.recipesToCook).to.have.lengthOf(0);
+  });
+
+  it('Should add and remove objects from an array of saved recipes', () => {
+  user.saveRecipeToCook(recipesData[0]);
+  user.saveRecipeToCook(recipesData[1]);
+
+  expect(user.recipesToCook).to.deep.equal([recipesData[0], recipesData[1]]);
+
+  user.removeRecipeToCook(recipesData[0]);
+  expect(user.recipesToCook).to.deep.equal([recipesData[1]]);
+  });
 });
