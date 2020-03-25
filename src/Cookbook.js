@@ -1,7 +1,7 @@
 class Cookbook {
-  constructor(recipeData, ingredientData) {
+  constructor(recipeData, ingredientsData) {
     this.recipes = recipeData;
-    this.ingredients = ingredientData;
+    this.ingredients = ingredientsData;
   }
 
   calculateCost(recipes) {

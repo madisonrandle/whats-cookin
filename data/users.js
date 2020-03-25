@@ -7601,3 +7601,8 @@ let usersData = [
     ]
   }
 ]
+
+
+if (typeof module !== 'undefined') {
+  module.exports = userData;
+}
