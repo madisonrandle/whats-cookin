@@ -1233,3 +1233,8 @@ let ingredientsData = [
     "estimatedCostInCents": 613
   }
 ]
+
+
+if (typeof module !== 'undefined') {
+  module.exports = ingredientsData;
+}
