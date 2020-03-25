@@ -1,11 +1,13 @@
-import {expect} from 'chai';
-
 const chai = require('chai');
 const expect = chai.expect;
 
-import recipeData from '../data/recipes.js';
-import ingredientData from '../data/ingredients.js';
-import Cookbook from '../src/Cookbook.js'
+const Cookbook = require('../src/Cookbook.js');
+
+const recipeData = require('../data/recipes.js');
+console.log('recipeData', recipeData);
+
+const ingredientData = require('../data/ingredients.js');
+console.log('ingredientData', ingredientData)
 
 let cookbook;
 
@@ -24,19 +26,21 @@ describe('Cookbhook', () => {
 
   //cookbook.ingredientData
   describe('cookbook.ingredientData', () => {
+    
     it('should have an array of all ingredients', () => {
+      console.log(cookbook)
       expect(cookbook.ingredientData).to.be.an('array');
     });
 
-    it('should have an ID for each ingredient', () => {
+    it.skip('should have an ID for each ingredient', () => {
       expect(cookbook.ingredientData[0].id).to.equal()
     });
 
-    it('should have an estimated cost in cents for each ingredient', () => {
+    it.skip('should have an estimated cost in cents for each ingredient', () => {
       expect(cookbook.ingredientData[0].estimatedCostInCents).to.equal();
     });
 
-    it('should have a name for each ingredient', () => {
+    it.skip('should have a name for each ingredient', () => {
       expect(cookbook.ingredientData[0].name).to.equal()
     });
   })
@@ -44,41 +48,41 @@ describe('Cookbhook', () => {
   //cookbook.recipeData
   describe('cookbook.recipeData', () => {
     
-    it('should have an array of all recipes', () => {
+    it.skip('should have an array of all recipes', () => {
       expect(cookbook.recipeData).to.be.an('array');
     });
 
-    it('should have a name for each recipe', () => {
+    it.skip('should have a name for each recipe', () => {
       expect(cookbook.recipeData[0].name).to.equal();
     })
 
-    it('should have an image for each recipe', () => {
+    it.skip('should have an image for each recipe', () => {
       expect(cookbook.recipeData[0].image).to.equal();
     });
 
-    it('should have a list of ingredients from each recipe', () => {
+    it.skip('should have a list of ingredients from each recipe', () => {
       expect(cookbook.recipeData[0].ingredients.length).to.equal()
     });
 
-    it('should have a list of instructions from each recipe', () => {
+    it.skip('should have a list of instructions from each recipe', () => {
       expect(cookbook.recipeData[0].instructions.length).to.equal();
     });
 
-    it('should have a list of tags for each recipe', () => {
+    it.skip('should have a list of tags for each recipe', () => {
       expect(cookbook.recipeData[0].tags).to.equal();
     });
   })
   describe('Cookbook Methods', () => {
 
-    it('should be able to filter through the array by ingredients', () => {
+    it.skip('should be able to filter through the array by ingredients', () => {
       expect(cookbook.findRecipe('ingredient')).to.equal();
     });
 
-    it('should be able to filter through the array by name', () => {
+    it.skip('should be able to filter through the array by name', () => {
       expect(cookbook.findRecipe('title').length).to.equal(1);
     });
 
-    it('should be able to calculate the cost for an ingredient', () => {
+    it.skip('should be able to calculate the cost for an ingredient', () => {
       expect(cookbook.calculateCost(recipeData)).to.equal('$amount')
     })
 
