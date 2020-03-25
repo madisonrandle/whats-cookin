@@ -4,16 +4,17 @@ const expect = chai.expect;
 const Cookbook = require('../src/Cookbook.js');
 
 const recipeData = require('../data/recipes.js');
-console.log('recipeData', recipeData);
+// console.log('recipeData', recipeData);
 
-const ingredientData = require('../data/ingredients.js');
-console.log('ingredientData', ingredientData)
+const ingredientsData = require('../data/ingredients.js');
+// console.log('ingredientData', ingredientData)
 
 let cookbook;
 
-describe('Cookbhook', () => {
+describe('Cookbook', () => {
+  
   beforeEach(() => {
-    cookbook = new Cookbook(recipeData, ingredientData);
+    cookbook = new Cookbook(recipeData, ingredientsData);
   });
 
   it('should be a function', () => {
@@ -28,64 +29,76 @@ describe('Cookbhook', () => {
   describe('cookbook.ingredientData', () => {
     
     it('should have an array of all ingredients', () => {
-      console.log(cookbook)
-      expect(cookbook.ingredientData).to.be.an('array');
+      // console.log(cookbook)
+      expect(cookbook.ingredients).to.be.a('array');
     });
 
-    it.skip('should have an ID for each ingredient', () => {
-      expect(cookbook.ingredientData[0].id).to.equal()
+    it('should have an ID for each ingredient', () => {
+      expect(cookbook.ingredients[0].id).to.equal(20081)
     });
 
-    it.skip('should have an estimated cost in cents for each ingredient', () => {
-      expect(cookbook.ingredientData[0].estimatedCostInCents).to.equal();
+    it('should have an estimated cost in cents for each ingredient', () => {
+      expect(cookbook.ingredients[0].estimatedCostInCents).to.equal(142);
     });
 
-    it.skip('should have a name for each ingredient', () => {
-      expect(cookbook.ingredientData[0].name).to.equal()
+    it('should have a name for each ingredient', () => {
+      expect(cookbook.ingredients[0].name).to.equal('wheat flour')
     });
   })
 
   //cookbook.recipeData
   describe('cookbook.recipeData', () => {
     
-    it.skip('should have an array of all recipes', () => {
-      expect(cookbook.recipeData).to.be.an('array');
+    it('should have an array of all recipes', () => {
+      expect(cookbook.recipes).to.be.a('array');
     });
 
-    it.skip('should have a name for each recipe', () => {
-      expect(cookbook.recipeData[0].name).to.equal();
+    it('should have a name for each recipe', () => {
+      expect(cookbook.recipes[0].name).to.equal('Loaded Chocolate Chip Pudding Cookie Cups');
     })
 
-    it.skip('should have an image for each recipe', () => {
-      expect(cookbook.recipeData[0].image).to.equal();
+    it('should have an image for each recipe', () => {
+      expect(cookbook.recipes[0].image).to.equal('https://spoonacular.com/recipeImages/595736-556x370.jpg');
     });
 
-    it.skip('should have a list of ingredients from each recipe', () => {
-      expect(cookbook.recipeData[0].ingredients.length).to.equal()
+    it('should have a list of ingredients from each recipe', () => {
+      expect(cookbook.recipes[0].ingredients.length).to.equal(11);
     });
 
-    it.skip('should have a list of instructions from each recipe', () => {
-      expect(cookbook.recipeData[0].instructions.length).to.equal();
+    it('should have a list of instructions from each recipe', () => {
+      expect(cookbook.recipes[0].instructions.length).to.equal(6);
     });
 
-    it.skip('should have a list of tags for each recipe', () => {
-      expect(cookbook.recipeData[0].tags).to.equal();
+    it('should have a list of tags for each recipe', () => {
+      expect(cookbook.recipes[0].tags).to.deep.equal([
+        'antipasti',
+        'starter',
+        'snack',
+        'appetizer',
+        'antipasto',
+        "hor d'oeuvre"
+      ]);
     });
   })
   describe('Cookbook Methods', () => {
 
-    it.skip('should be able to filter through the array by ingredients', () => {
-      expect(cookbook.findRecipe('ingredient')).to.equal();
+    it('should be able to find a recipe by name', () => {
+      let searchedRecipe = cookbook.findRecipe('Loaded');
+      expect(searchedRecipe.length).to.equal(1);
+      expect(searchedRecipe[0].name).to.equal('Loaded Chocolate Chip Pudding Cookie Cups');
     });
 
-    it.skip('should be able to filter through the array by name', () => {
-      expect(cookbook.findRecipe('title').length).to.equal(1);
+    it('should be able to find recipe by ingredients', () => {
+      let searchedRecipe = cookbook.findRecipe('celery');
+      expect(searchedRecipe.length).to.equal(2);
+      expect(searchedRecipe[0].name).to.equal('Easy Creamy Potato Salad with Yogurt');
+      expect(searchedRecipe[1].name).to.equal('Curried Strawberry Chicken Salad');
     });
 
-    it.skip('should be able to calculate the cost for an ingredient', () => {
-      expect(cookbook.calculateCost(recipeData)).to.equal('$amount')
-    })
-
+    it('should be able to calculate the cost for an ingredient', () => {
+      const cookbook = new Cookbook(recipeData[0], ingredientsData);
+      expect(cookbook.calculateCost(recipeData[0])).to.equal('$59.21');
+    });
    
   });
 })
