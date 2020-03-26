@@ -34,7 +34,7 @@ const displayRecipeCards = () => {
   recipesWrapper.innerHTML = '';
   recipeData.forEach(recipe => {
     recipesWrapper.insertAdjacentHTML('afterbegin', `
-      <article class="recipe-card">
+      <article class="recipe-card" id=${recipe.id}>
         <section class="recipe-card-header">
           <button tabindex="2" type="button" class="add-recipe-icon"></button>
           <button tabindex="2" type="button" class="favorite-recipe-icon-inactive favorite-recipe-icon-active"></button>
@@ -70,12 +70,24 @@ const displayRecipesToCook = () => {
   `);
 }
 
-const displayActiveFavoriteButton = (e) => {
+const updateFavoritesButton = (e) => {
   e.target.classList.toggle('favorite-recipe-icon-inactive');
-
-
-
+  updateUserFavorites(e);
 }
+
+const updateUserFavorites = (e) => {
+  let favoritedRecipe = parseInt(e.target.closest('.recipe-card').id);
+  let foundRecipe = recipeData.find(recipe => recipe.id === favoritedRecipe);
+  
+  if (!e.target.classList.contains('favorite-recipe-icon-inactive')) {
+    user.addRecipeToFavorites(foundRecipe);
+  } else {
+    user.removeRecipeFromFavorites(foundRecipe);
+  }
+}
+
+
+
 
 getUserData();
 
@@ -87,7 +99,7 @@ const eventHandler = (e) => {
   } else if (e.target.classList.contains('home-button')) {
     displayRecipeCards(e);
   } else if (e.target.classList.contains('favorite-recipe-icon-active')) {
-    displayActiveFavoriteButton(e);
+    updateFavoritesButton(e);
   }
 
 }
