@@ -23,6 +23,26 @@ class User {
     this.recipesToCook.splice(i, 1)
   }
 
+  filterFavoriteRecipes(recipeTag) {
+    return this.favoriteRecipes.filter(recipe => {
+      return recipe.tags.includes(recipeTag);
+    });
+  }
+
+  filterRecipesToCook(recipeTag) {
+    return this.recipesToCook.filter(recipe => {
+      return recipe.tags.includes(recipeTag);
+    });
+  }
+
+  findFavorites(searchContent) {
+    return this.favoriteRecipes.filter(recipe => {
+      return recipe.name.includes(searchContent)
+      || recipe.ingredients.find(ingredient => {
+        return ingredient.name.includes(searchContent)
+        });
+    });
+  }
 }
 
 if (typeof module !== 'undefined') {
