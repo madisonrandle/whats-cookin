@@ -2,6 +2,8 @@ let body = document.querySelector('body');
 let userWelcomeMessage = document.querySelector('.title-and-greeting-wrapper');
 let subheaderWrapper = document.querySelector('.my-recipes');
 let recipesWrapper = document.querySelector('main');
+let filterWrapper = document.querySelector('.filter-by-type-wrapper');
+
 
 let user;
 
@@ -29,8 +31,10 @@ const displayUserName = (userData) => {
 
 const displayRecipeCards = (e) => {
   let addFavoriteButtonElement;
-  recipesWrapper.innerHTML = '';
-  subheaderWrapper.innerHTML = '';
+  // filterWrapper.lastElementChild.innerHTML = '';
+  // recipesWrapper.innerHTML = '';
+  // subheaderWrapper.innerHTML = '';
+  removeWrappersInnerHtml();
   recipeData.forEach(recipe => {
     recipesWrapper.insertAdjacentHTML('afterbegin', `
       <article class="recipe-card" id=${recipe.id}>
@@ -66,8 +70,10 @@ const displayRecipeCards = (e) => {
 };
 
 const displayFavoriteRecipes = () => {
-  recipesWrapper.innerHTML = '';
-  subheaderWrapper.innerHTML = '';
+  // filterWrapper.lastElementChild.innerHTML = '';
+  // recipesWrapper.innerHTML = '';
+  // subheaderWrapper.innerHTML = '';
+  removeWrappersInnerHtml();
   subheaderWrapper.insertAdjacentHTML('afterbegin', `
       <h1>Favorite Recipes</h1>
   `);
@@ -93,8 +99,10 @@ const removeRecipeCard = (e) => {
 }
 
 const displayRecipesToCook = (e) => {
-  subheaderWrapper.innerHTML = '';
-  recipesWrapper.innerHTML = '';
+  // filterWrapper.lastElementChild.innerHTML = '';
+  // subheaderWrapper.innerHTML = '';
+  // recipesWrapper.innerHTML = '';
+  removeWrappersInnerHtml();
   subheaderWrapper.insertAdjacentHTML('afterbegin', `
       <h1>This Week</h1>
   `);
@@ -149,6 +157,39 @@ const removeRecipeToCook = (e) => {
   removeRecipeCard(e);
 }
 
+const displayTypeFilter = (e) => {
+  filterWrapper.lastElementChild.innerHTML = '';
+  filterWrapper.insertAdjacentHTML('beforeend', `
+    <ul class="type-checklist">
+      <li><input tabindex="2" type="checkbox" />Antipasti</li>
+      <li><input tabindex="2" type="checkbox" />Antipasto</li>
+      <li><input tabindex="2" type="checkbox" />Appetizer</li>
+      <li><input tabindex="2" type="checkbox" />Breakfast</li>
+      <li><input tabindex="2" type="checkbox" />Brunch</li>
+      <li><input tabindex="2" type="checkbox" />Condiment</li>
+      <li><input tabindex="2" type="checkbox" />Dinner</li>
+      <li><input tabindex="2" type="checkbox" />Dip</li>
+      <li><input tabindex="2" type="checkbox" />Hor D'oeuvre</li>
+      <li><input tabindex="2" type="checkbox" />Lunch</li>
+      <li><input tabindex="2" type="checkbox" />Main Course</li>
+      <li><input tabindex="2" type="checkbox" />Main Dish</li>
+      <li><input tabindex="2" type="checkbox" />Morning Meal</li>
+      <li><input tabindex="2" type="checkbox" />Salad</li>
+      <li><input tabindex="2" type="checkbox" />Sauce</li>
+      <li><input tabindex="2" type="checkbox" />Side Dish</li>
+      <li><input tabindex="2" type="checkbox" />Snack</li>
+      <li><input tabindex="2" type="checkbox" />Spread</li>
+      <li><input tabindex="2" type="checkbox" />Starter</li>
+    </ul>
+  `)
+}
+
+const removeWrappersInnerHtml = () => {
+  filterWrapper.lastElementChild.innerHTML = '';
+  recipesWrapper.innerHTML = '';
+  subheaderWrapper.innerHTML = '';
+}
+
 getUserData();
 
 const eventHandler = (e) => {
@@ -164,6 +205,8 @@ const eventHandler = (e) => {
     addRecipeToCook(e);
   } else if (e.target.classList.contains('remove-recipe-icon')) {
     removeRecipeToCook(e);
+  } else if (e.target.classList.contains('search-by-type-click')) {
+    displayTypeFilter(e);
   }
 }
 
