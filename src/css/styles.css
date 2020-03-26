@@ -169,15 +169,6 @@ main {
   transition:all .5s ease;
 }
 
-/* .favorite-recipe-icon-inactive {
-  background: url(../images/inactiveFavorite.svg);
-}
-
-.favorite-recipe-icon-inactive:hover {
-  background: url(../images/favoriteHover.svg);
-  transition:all .5s ease;
-} */
-
 .favorite-recipe-icon-active {
   background: url(../images/activeFavorite.svg);
 }
@@ -212,6 +203,35 @@ main {
 
 .recipe-image {
   max-width: 100%;
+}
+
+/* FILTER RECIPE BY TAG SECTION */
+
+.filter-by-type-wrapper {
+  color: black;
+  height: 100%;
+  text-align: center;
+}
+
+.type-checklist {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.search-by-type-click:hover {
+  cursor: pointer;
+}
+
+.type-checklist li {
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+  margin: .5rem;
+}
+
+.type-checklist input {
+  cursor: pointer;
 }
 
 //
