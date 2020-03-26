@@ -1,10 +1,7 @@
-
-
 let body = document.querySelector('body');
 let userWelcomeMessage = document.querySelector('.title-and-greeting-wrapper');
 let subheaderWrapper = document.querySelector('.my-recipes');
 let recipesWrapper = document.querySelector('main');
-
 
 let user;
 
@@ -30,8 +27,10 @@ const displayUserName = (userData) => {
   `);
 };
 
-const displayRecipeCards = () => {
+const displayRecipeCards = (e) => {
+  let addFavoriteButtonElement;
   recipesWrapper.innerHTML = '';
+  subheaderWrapper.innerHTML = '';
   recipeData.forEach(recipe => {
     recipesWrapper.insertAdjacentHTML('afterbegin', `
       <article class="recipe-card" id=${recipe.id}>
@@ -45,6 +44,24 @@ const displayRecipeCards = () => {
         </section>
       </article>
     `);
+    addFavoriteButtonElement = recipesWrapper.firstElementChild.firstElementChild;
+    user.favoriteRecipes.forEach(favoritedRecipe => {
+      if (favoritedRecipe.id === recipe.id) {
+        addFavoriteButtonElement.parentElement.remove();
+        recipesWrapper.insertAdjacentHTML('afterbegin', `
+          <article class="recipe-card" id=${favoritedRecipe.id}>
+          <section class="recipe-card-header">
+          <button tabindex="2" type="button" class="add-recipe-icon"></button>
+          <button tabindex="2" type="button" class="favorite-recipe-icon-active"></button>
+          </section>
+          <p class="recipe-name">${favoritedRecipe.name}</p>
+          <section tabindex="2" class="recipe-card-main">
+          <img class="recipe-image" src="${favoritedRecipe.image}" alt="Picture of ${favoritedRecipe.name}">
+          </section>
+          </article>
+        `);
+      };
+    });
   });
 };
 
@@ -52,10 +69,7 @@ const displayFavoriteRecipes = () => {
   recipesWrapper.innerHTML = '';
   subheaderWrapper.innerHTML = '';
   subheaderWrapper.insertAdjacentHTML('afterbegin', `
-      <h1>My Recipes</h1>
-      <div class="my-recipes-nav-buttons-wrapper">
-        <button tabindex="2" class="all-recipes-button" type="button">All Recipes</button>
-      </div>
+      <h1>Favorite Recipes</h1>
   `);
 
   user.favoriteRecipes.forEach(recipe => {
@@ -74,23 +88,37 @@ const displayFavoriteRecipes = () => {
   });
 }
 
-const removeFavoriteRecipeCard = (e) => {
-  console.log('hey');
-  if (e.target.classList.contains('handle-favorites')) {
-    e.target.closest('.recipe-card').remove();
-  }
-
+const removeRecipeCard = (e) => {
+  e.target.classList.contains('handle-favorites') && e.target.closest('.recipe-card').remove();
 }
 
-const displayRecipesToCook = () => {
+const displayRecipesToCook = (e) => {
   subheaderWrapper.innerHTML = '';
   recipesWrapper.innerHTML = '';
   subheaderWrapper.insertAdjacentHTML('afterbegin', `
       <h1>This Week</h1>
-      <div class="my-recipes-nav-buttons-wrapper">
-        <button tabindex="2" class="all-recipes-button" type="button">All Recipes</button>
-      </div>
   `);
+
+  user.recipesToCook.forEach(recipe => {
+    recipesWrapper.insertAdjacentHTML('afterbegin', `
+      <article class="recipe-card" id=${recipe.id}>
+        <section class="recipe-card-header">
+          <button tabindex="2" type="button" class="add-recipe-icon"></button>
+          <button tabindex="2" type="button" class="remove-recipe-icon handle-favorites"></button>
+        </section>
+        <p class="recipe-name">${recipe.name}</p>
+        <section tabindex="2" class="recipe-card-main">
+          <img class="recipe-image" src="${recipe.image}" alt="Picture of ${recipe.name}">
+        </section>
+      </article>
+    `);
+    addFavoriteButtonElement = recipesWrapper.firstElementChild.firstElementChild.lastElementChild;
+    user.favoriteRecipes.forEach(favoritedRecipe => {
+      if (favoritedRecipe.id === parseInt(recipesWrapper.firstElementChild.id)) {
+        addFavoriteButtonElement.classList.remove('favorite-recipe-icon-inactive');
+      }
+    });
+  });
 }
 
 const updateFavoritesButton = (e) => {
@@ -99,19 +127,27 @@ const updateFavoritesButton = (e) => {
 }
 
 const updateUserFavorites = (e) => {
-  let favoritedRecipe = parseInt(e.target.closest('.recipe-card').id);
-  let foundRecipe = recipeData.find(recipe => recipe.id === favoritedRecipe);
+  let favoritedRecipeID = parseInt(e.target.closest('.recipe-card').id);
+  let foundRecipe = recipeData.find(recipe => recipe.id === favoritedRecipeID);
 
-  if (!e.target.classList.contains('favorite-recipe-icon-inactive')) {
-    user.addRecipeToFavorites(foundRecipe);
-  } else {
-    user.removeRecipeFromFavorites(foundRecipe);
-    removeFavoriteRecipeCard(e);
-  }
+  !e.target.classList.contains('favorite-recipe-icon-inactive') ?
+    user.addRecipeToFavorites(foundRecipe) :
+      user.removeRecipeFromFavorites(foundRecipe)
+        removeRecipeCard(e);
 }
 
+const addRecipeToCook = (e) => {
+  let addedRecipeToCookID = parseInt(e.target.closest('.recipe-card').id);
+  let foundRecipe = recipeData.find(recipe => recipe.id === addedRecipeToCookID);
+  !user.recipesToCook.includes(foundRecipe) && user.saveRecipeToCook(foundRecipe);
+}
 
-
+const removeRecipeToCook = (e) => {
+  let recipeToRemoveID = parseInt(e.target.closest('.recipe-card').id);
+  let foundRecipe = recipeData.find(recipe => recipe.id === recipeToRemoveID);
+  user.removeRecipeToCook(foundRecipe)
+  removeRecipeCard(e);
+}
 
 getUserData();
 
@@ -124,9 +160,11 @@ const eventHandler = (e) => {
     displayRecipeCards(e);
   } else if (e.target.classList.contains('favorite-recipe-icon-active')) {
     updateFavoritesButton(e);
+  } else if (e.target.classList.contains('add-recipe-icon')) {
+    addRecipeToCook(e);
+  } else if (e.target.classList.contains('remove-recipe-icon')) {
+    removeRecipeToCook(e);
   }
-
 }
-body.addEventListener('click', eventHandler);
 
-//
+body.addEventListener('click', eventHandler);
