@@ -48,4 +48,3 @@ class User {
 if (typeof module !== 'undefined') {
   module.exports = User;
 }
-// User - add/RemoveToFavorites, add/RemoveToCook, filter/findFavoriteRecipes
