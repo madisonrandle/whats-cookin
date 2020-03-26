@@ -7,6 +7,7 @@
 body {
   height: auto;
   overflow: scroll;
+
 }
 
 /* HEADERS */
@@ -155,14 +156,14 @@ main {
   transition:all .5s ease;
 }
 
-.favorite-recipe-icon-inactive {
+/* .favorite-recipe-icon-inactive {
   background: url(../images/inactiveFavorite.svg);
 }
 
 .favorite-recipe-icon-inactive:hover {
   background: url(../images/favoriteHover.svg);
   transition:all .5s ease;
-}
+} */
 
 .favorite-recipe-icon-active {
   background: url(../images/activeFavorite.svg);
@@ -170,6 +171,15 @@ main {
 
 .favorite-recipe-icon-active:hover {
   opacity: 0.7;
+}
+
+.favorite-recipe-icon-inactive {
+  background: url(../images/inactiveFavorite.svg);
+}
+
+.favorite-recipe-icon-inactive:hover {
+  background: url(../images/favoriteHover.svg);
+  transition:all .5s ease;
 }
 
 .recipe-card-main {
