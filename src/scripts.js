@@ -49,14 +49,37 @@ const displayRecipeCards = () => {
 };
 
 const displayFavoriteRecipes = () => {
-  subheaderWrapper.innerHTML = '';
   recipesWrapper.innerHTML = '';
+  subheaderWrapper.innerHTML = '';
   subheaderWrapper.insertAdjacentHTML('afterbegin', `
       <h1>My Recipes</h1>
       <div class="my-recipes-nav-buttons-wrapper">
         <button tabindex="2" class="all-recipes-button" type="button">All Recipes</button>
       </div>
   `);
+
+  user.favoriteRecipes.forEach(recipe => {
+    recipesWrapper.insertAdjacentHTML('afterbegin', `
+      <article class="recipe-card" id=${recipe.id}>
+        <section class="recipe-card-header">
+          <button tabindex="2" type="button" class="add-recipe-icon"></button>
+          <button tabindex="2" type="button" class="favorite-recipe-icon-active handle-favorites"></button>
+        </section>
+        <p class="recipe-name">${recipe.name}</p>
+        <section tabindex="2" class="recipe-card-main">
+          <img class="recipe-image" src="${recipe.image}" alt="Picture of ${recipe.name}">
+        </section>
+      </article>
+    `);
+  });
+}
+
+const removeFavoriteRecipeCard = (e) => {
+  console.log('hey');
+  if (e.target.classList.contains('handle-favorites')) {
+    e.target.closest('.recipe-card').remove();
+  }
+
 }
 
 const displayRecipesToCook = () => {
@@ -78,11 +101,12 @@ const updateFavoritesButton = (e) => {
 const updateUserFavorites = (e) => {
   let favoritedRecipe = parseInt(e.target.closest('.recipe-card').id);
   let foundRecipe = recipeData.find(recipe => recipe.id === favoritedRecipe);
-  
+
   if (!e.target.classList.contains('favorite-recipe-icon-inactive')) {
     user.addRecipeToFavorites(foundRecipe);
   } else {
     user.removeRecipeFromFavorites(foundRecipe);
+    removeFavoriteRecipeCard(e);
   }
 }
 
