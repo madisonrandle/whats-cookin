@@ -90,16 +90,16 @@ h2,
 .my-recipes-nav-buttons-wrapper {
   display: flex;
   flex-flow: wrap;
-  justify-content: flex-end;
+  justify-content: space-around;
 }
 
 .view-favorites-button,
 .home-button,
 .all-recipes-button,
-.pantry-button {
+.pantry-button,
+.this-week-button {
   border: none;
   font-size: 1.4rem;
-  margin-left: 2rem;
 }
 
 .all-recipes-button {
@@ -109,7 +109,8 @@ h2,
 .view-favorites-button:hover,
 .home-button:hover,
 .all-recipes-button:hover,
-.pantry-button:hover {
+.pantry-button:hover,
+.this-week-button:hover {
   color: #6AA1F9;
   cursor: pointer;
 }
