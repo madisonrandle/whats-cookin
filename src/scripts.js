@@ -4,7 +4,6 @@ let subheaderWrapper = document.querySelector('.my-recipes');
 let recipesWrapper = document.querySelector('main');
 let filterWrapper = document.querySelector('.filter-by-type-wrapper');
 
-
 let user;
 
 const findRandomUser = () => {
@@ -31,9 +30,6 @@ const displayUserName = (userData) => {
 
 const displayRecipeCards = (e) => {
   let addFavoriteButtonElement;
-  // filterWrapper.lastElementChild.innerHTML = '';
-  // recipesWrapper.innerHTML = '';
-  // subheaderWrapper.innerHTML = '';
   removeWrappersInnerHtml();
   recipeData.forEach(recipe => {
     recipesWrapper.insertAdjacentHTML('afterbegin', `
@@ -70,9 +66,6 @@ const displayRecipeCards = (e) => {
 };
 
 const displayFavoriteRecipes = () => {
-  // filterWrapper.lastElementChild.innerHTML = '';
-  // recipesWrapper.innerHTML = '';
-  // subheaderWrapper.innerHTML = '';
   removeWrappersInnerHtml();
   subheaderWrapper.insertAdjacentHTML('afterbegin', `
       <h1>Favorite Recipes</h1>
@@ -99,9 +92,6 @@ const removeRecipeCard = (e) => {
 }
 
 const displayRecipesToCook = (e) => {
-  // filterWrapper.lastElementChild.innerHTML = '';
-  // subheaderWrapper.innerHTML = '';
-  // recipesWrapper.innerHTML = '';
   removeWrappersInnerHtml();
   subheaderWrapper.insertAdjacentHTML('afterbegin', `
       <h1>This Week</h1>
@@ -161,27 +151,47 @@ const displayTypeFilter = (e) => {
   filterWrapper.lastElementChild.innerHTML = '';
   filterWrapper.insertAdjacentHTML('beforeend', `
     <ul class="type-checklist">
-      <li><input tabindex="2" type="checkbox" />Antipasti</li>
-      <li><input tabindex="2" type="checkbox" />Antipasto</li>
-      <li><input tabindex="2" type="checkbox" />Appetizer</li>
-      <li><input tabindex="2" type="checkbox" />Breakfast</li>
-      <li><input tabindex="2" type="checkbox" />Brunch</li>
-      <li><input tabindex="2" type="checkbox" />Condiment</li>
-      <li><input tabindex="2" type="checkbox" />Dinner</li>
-      <li><input tabindex="2" type="checkbox" />Dip</li>
-      <li><input tabindex="2" type="checkbox" />Hor D'oeuvre</li>
-      <li><input tabindex="2" type="checkbox" />Lunch</li>
-      <li><input tabindex="2" type="checkbox" />Main Course</li>
-      <li><input tabindex="2" type="checkbox" />Main Dish</li>
-      <li><input tabindex="2" type="checkbox" />Morning Meal</li>
-      <li><input tabindex="2" type="checkbox" />Salad</li>
-      <li><input tabindex="2" type="checkbox" />Sauce</li>
-      <li><input tabindex="2" type="checkbox" />Side Dish</li>
-      <li><input tabindex="2" type="checkbox" />Snack</li>
-      <li><input tabindex="2" type="checkbox" />Spread</li>
-      <li><input tabindex="2" type="checkbox" />Starter</li>
+      <li><input tabindex="2" type="checkbox" class="checkbox"/>Antipasti</li>
+      <li><input tabindex="2" type="checkbox" class="checkbox"/>Antipasto</li>
+      <li><input tabindex="2" type="checkbox" class="checkbox"/>Appetizer</li>
+      <li><input tabindex="2" type="checkbox" class="checkbox"/>Breakfast</li>
+      <li><input tabindex="2" type="checkbox" class="checkbox"/>Brunch</li>
+      <li><input tabindex="2" type="checkbox" class="checkbox"/>Condiment</li>
+      <li><input tabindex="2" type="checkbox" class="checkbox"/>Dinner</li>
+      <li><input tabindex="2" type="checkbox" class="checkbox"/>Dip</li>
+      <li><input tabindex="2" type="checkbox" class="checkbox"/>Hor D'oeuvre</li>
+      <li><input tabindex="2" type="checkbox" class="checkbox"/>Lunch</li>
+      <li><input tabindex="2" type="checkbox" class="checkbox"/>Main Course</li>
+      <li><input tabindex="2" type="checkbox" class="checkbox"/>Main Dish</li>
+      <li><input tabindex="2" type="checkbox" class="checkbox"/>Morning Meal</li>
+      <li><input tabindex="2" type="checkbox" class="checkbox"/>Salad</li>
+      <li><input tabindex="2" type="checkbox" class="checkbox"/>Sauce</li>
+      <li><input tabindex="2" type="checkbox" class="checkbox"/>Side Dish</li>
+      <li><input tabindex="2" type="checkbox" class="checkbox"/>Snack</li>
+      <li><input tabindex="2" type="checkbox" class="checkbox"/>Spread</li>
+      <li><input tabindex="2" type="checkbox" class="checkbox"/>Starter</li>
+      <li><button tabindex="2" class="filter-recipe-type-button">Filter By Type</button></li>
     </ul>
   `)
+}
+
+const getTypeFilterResults = (e) => {
+  // recipesWrapper.innerHTML = '';
+  
+  let currentTag;
+  let heyo = recipeData.reduce((acc, recipe) => {
+
+    recipe.tags.forEach(tag => {
+      if (tag === e.target.closest('li').innerText.toLowerCase() && !acc.includes(tag)) {
+        acc.push(tag);
+      }
+      console.log('repeater');
+    })
+
+    return acc;
+
+  }, []);
+  console.log(heyo);
 }
 
 const removeWrappersInnerHtml = () => {
@@ -205,8 +215,10 @@ const eventHandler = (e) => {
     addRecipeToCook(e);
   } else if (e.target.classList.contains('remove-recipe-icon')) {
     removeRecipeToCook(e);
-  } else if (e.target.classList.contains('search-by-type-click')) {
+  } else if (e.target.classList.contains('filter-recipes-button')) {
     displayTypeFilter(e);
+  } else if (e.target.classList.contains('checkbox')) {
+    getTypeFilterResults(e);
   }
 }
 
