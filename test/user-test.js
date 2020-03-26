@@ -61,4 +61,20 @@ describe.only('User', () => {
   user.removeRecipeToCook(recipesData[0]);
   expect(user.recipesToCook).to.deep.equal([recipesData[1]]);
   });
+
+  it('Should be able to filter recipes by tag', () => {
+    expect(user.filterFavoriteRecipes('snack')).to.be.a('array');
+    expect(user.filterRecipesToCook('snack')).to.be.a('array');
+  });
+
+  it('Should be able to search for any saved recipes by name or ingredient', () => {
+    user.addRecipeToFavorites(recipesData[0]);
+    expect(user.findFavorites('Chocolate')).to.be.a('array');
+
+    expect(user.findFavorites('Chocolate')).to.deep.equal([recipesData[0]]);
+  });
+
+
+
+
 });
