@@ -65,7 +65,9 @@ h2,
 .search-icon:hover,
 .add-recipe-icon,
 .favorite-recipe-icon-inactive,
-.favorite-recipe-icon-active {
+.favorite-recipe-icon-active,
+.remove-recipe-icon,
+.remove-recipe-icon:hover {
   cursor: pointer;
 }
 
@@ -140,10 +142,21 @@ main {
 
 .add-recipe-icon,
 .favorite-recipe-icon-inactive,
-.favorite-recipe-icon-active {
+.favorite-recipe-icon-active,
+.remove-recipe-icon {
   border: none;
   height: 2rem;
   min-width: 2rem;
+}
+
+.remove-recipe-icon {
+  background: url(../images/remove.svg);
+  background-size: cover;
+}
+
+.remove-recipe-icon:hover {
+  background: url(../images/removeHover.svg);
+  background-size: cover;
 }
 
 .add-recipe-icon {
