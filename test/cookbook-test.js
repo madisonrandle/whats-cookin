@@ -2,12 +2,8 @@ const chai = require('chai');
 const expect = chai.expect;
 
 const Cookbook = require('../src/Cookbook.js');
-
 const recipeData = require('../data/recipes.js');
-// console.log('recipeData', recipeData);
-
 const ingredientsData = require('../data/ingredients.js');
-// console.log('ingredientData', ingredientData)
 
 let cookbook;
 
