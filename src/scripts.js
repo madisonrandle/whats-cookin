@@ -4,7 +4,7 @@ let subheaderWrapper = document.querySelector('.my-recipes');
 let recipesWrapper = document.querySelector('main');
 let filterWrapper = document.querySelector('.filter-by-type-wrapper');
 
-let user;
+let user, filteredRecipes = [];
 
 const findRandomUser = () => {
   for (let i = usersData.length - 1; i > 0; i--) {
@@ -147,7 +147,7 @@ const removeRecipeToCook = (e) => {
   removeRecipeCard(e);
 }
 
-const displayTypeFilter = (e) => {
+const displayFilterTypeOptions = (e) => {
   filterWrapper.lastElementChild.innerHTML = '';
   filterWrapper.insertAdjacentHTML('beforeend', `
     <ul class="type-checklist">
@@ -170,28 +170,47 @@ const displayTypeFilter = (e) => {
       <li><input tabindex="2" type="checkbox" class="checkbox"/>Snack</li>
       <li><input tabindex="2" type="checkbox" class="checkbox"/>Spread</li>
       <li><input tabindex="2" type="checkbox" class="checkbox"/>Starter</li>
-      <li><button tabindex="2" class="filter-recipe-type-button">Filter By Type</button></li>
+      <li><button tabindex="2" class="filter-recipe-by-type-button">Filter By Type</button></li>
     </ul>
   `)
 }
 
-const getTypeFilterResults = (e) => {
-  // recipesWrapper.innerHTML = '';
-  
-  let currentTag;
-  let heyo = recipeData.reduce((acc, recipe) => {
-
+const getFilteredRecipes = (e) => {
+  recipeData.forEach(recipe => {
     recipe.tags.forEach(tag => {
-      if (tag === e.target.closest('li').innerText.toLowerCase() && !acc.includes(tag)) {
-        acc.push(tag);
+      if (tag === e.target.closest('li').innerText.toLowerCase() && !filteredRecipes.includes(tag)) {
+        filteredRecipes.push(tag);
       }
-      console.log('repeater');
     })
+  });
+  return filteredRecipes;
+}
 
-    return acc;
-
-  }, []);
-  console.log(heyo);
+const getFilterByTypeResults = () => {
+  let allFilteredRecipes;
+  recipesWrapper.innerHTML = '';
+  recipeData.forEach(recipe => {
+    allFilteredRecipes = filteredRecipes.reduce((acc, filteredRecipe) => {
+      if (recipe.tags.includes(filteredRecipe) && !acc.includes(filteredRecipe)) {
+        acc.push(filteredRecipe);
+      };
+      return acc;
+    }, []);
+    allFilteredRecipes.forEach(checkedRecipe => {
+      recipesWrapper.insertAdjacentHTML('afterbegin', `
+        <article class="recipe-card" id=${recipe.id}>
+          <section class="recipe-card-header">
+            <button tabindex="2" type="button" class="add-recipe-icon"></button>
+            <button tabindex="2" type="button" class="favorite-recipe-icon-inactive favorite-recipe-icon-active"></button>
+          </section>
+          <p class="recipe-name">${recipe.name}</p>
+          <section tabindex="2" class="recipe-card-main">
+            <img class="recipe-image" src="${recipe.image}" alt="Picture of ${recipe.name}">
+          </section>
+        </article>
+      `);
+    });
+  });
 }
 
 const removeWrappersInnerHtml = () => {
@@ -216,9 +235,11 @@ const eventHandler = (e) => {
   } else if (e.target.classList.contains('remove-recipe-icon')) {
     removeRecipeToCook(e);
   } else if (e.target.classList.contains('filter-recipes-button')) {
-    displayTypeFilter(e);
+    displayFilterTypeOptions(e);
   } else if (e.target.classList.contains('checkbox')) {
-    getTypeFilterResults(e);
+    getFilteredRecipes(e);
+  } else if (e.target.classList.contains('filter-recipe-by-type-button')) {
+    getFilterByTypeResults(e);
   }
 }
 
