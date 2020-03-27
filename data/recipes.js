@@ -5379,6 +5379,40 @@ const recipeData = [
     "tags": [
       "side dish"
     ]
+  },
+  {
+    "id": 605132565,
+    "image": "https://spoonacular.com/recipeImages/605132-556x370.jpg",
+    "ingredients": [
+      {
+        "id": 1123,
+        "quantity": {
+          "amount": 2,
+          "unit": ""
+        }
+      },
+      {
+        "id": 1001,
+        "quantity": {
+          "amount": 1,
+          "unit": "teaspoon"
+        }
+      },
+    ],
+    "instructions": [
+      {
+        "instruction": "Add butter to pan",
+        "number": 1
+      },
+      {
+        "instruction": "cook eggs to desired doneness",
+        "number": 2
+      },
+    ],
+    "name": "Fried Eggs",
+    "tags": [
+      "breakfast"
+    ]
   }
 ];
 
