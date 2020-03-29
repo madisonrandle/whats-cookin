@@ -4,7 +4,26 @@ let subheaderWrapper = document.querySelector('.my-recipes');
 let recipesWrapper = document.querySelector('main');
 let filterWrapper = document.querySelector('.filter-by-type-wrapper');
 
-let user, filteredRecipes = [];
+let user, filteredRecipes = [], tagNames = [];
+
+const getRecipeTypes = () => {
+  return recipeData.reduce((acc, recipe) => {
+    recipe.tags.forEach(tag => {
+      !acc.includes(tag) && acc.push(tag);
+    })
+    return acc;
+  }, []);
+}
+
+const getFavortiedRecipeTypes = () => {
+  return user.favoriteRecipes.reduce((acc, recipe) => {
+    recipe.tags.forEach(tag => {
+      !acc.includes(tag) && acc.push(tag);
+    })
+    return acc;
+  }, []);
+}
+
 
 const findRandomUser = () => {
   for (let i = usersData.length - 1; i > 0; i--) {
@@ -65,10 +84,15 @@ const displayRecipeCards = (e) => {
   });
 };
 
-const displayFavoriteRecipes = () => {
+const displayFavoriteRecipes = (e) => {
   removeWrappersInnerHtml();
+  filterWrapper.firstElementChild.classList.add('hidden')
   subheaderWrapper.insertAdjacentHTML('afterbegin', `
       <h1>Favorite Recipes</h1>
+  `);
+
+  filterWrapper.insertAdjacentHTML('afterbegin', `
+    <button tabindex="2" class="filter-favorite-recipes-button">Filter Recipes</button>
   `);
 
   user.favoriteRecipes.forEach(recipe => {
@@ -149,30 +173,26 @@ const removeRecipeToCook = (e) => {
 
 const displayFilterTypeOptions = (e) => {
   filterWrapper.lastElementChild.innerHTML = '';
-  filterWrapper.insertAdjacentHTML('beforeend', `
-    <ul class="type-checklist">
-      <li><input tabindex="2" type="checkbox" class="checkbox"/>Antipasti</li>
-      <li><input tabindex="2" type="checkbox" class="checkbox"/>Antipasto</li>
-      <li><input tabindex="2" type="checkbox" class="checkbox"/>Appetizer</li>
-      <li><input tabindex="2" type="checkbox" class="checkbox"/>Breakfast</li>
-      <li><input tabindex="2" type="checkbox" class="checkbox"/>Brunch</li>
-      <li><input tabindex="2" type="checkbox" class="checkbox"/>Condiment</li>
-      <li><input tabindex="2" type="checkbox" class="checkbox"/>Dinner</li>
-      <li><input tabindex="2" type="checkbox" class="checkbox"/>Dip</li>
-      <li><input tabindex="2" type="checkbox" class="checkbox"/>Hor D'oeuvre</li>
-      <li><input tabindex="2" type="checkbox" class="checkbox"/>Lunch</li>
-      <li><input tabindex="2" type="checkbox" class="checkbox"/>Main Course</li>
-      <li><input tabindex="2" type="checkbox" class="checkbox"/>Main Dish</li>
-      <li><input tabindex="2" type="checkbox" class="checkbox"/>Morning Meal</li>
-      <li><input tabindex="2" type="checkbox" class="checkbox"/>Salad</li>
-      <li><input tabindex="2" type="checkbox" class="checkbox"/>Sauce</li>
-      <li><input tabindex="2" type="checkbox" class="checkbox"/>Side Dish</li>
-      <li><input tabindex="2" type="checkbox" class="checkbox"/>Snack</li>
-      <li><input tabindex="2" type="checkbox" class="checkbox"/>Spread</li>
-      <li><input tabindex="2" type="checkbox" class="checkbox"/>Starter</li>
-      <li><button tabindex="2" class="filter-recipe-by-type-button">Filter By Type</button></li>
-    </ul>
-  `)
+  filterWrapper.insertAdjacentHTML('beforeend', `<ul class="type-checklist"></ul>`);
+  if (e.target.classList.contains('filter-favorite-recipes-button')) {
+    getRecipeTypes().sort().forEach(tag => {
+      filterWrapper.lastElementChild.insertAdjacentHTML('beforeend', `
+        <li><input tabindex="2" type="checkbox" class="favorited-checkbox"/>${tag}</li>
+      `)
+    });
+    filterWrapper.lastElementChild.insertAdjacentHTML('beforeend', `
+      <li class="display-filtered-recipes-button"><button tabindex="2" class="filter-favorite-recipe-by-type-button">Filter By Type</button></li>
+    `);
+  } else {
+    getRecipeTypes().sort().forEach(tag => {
+      filterWrapper.lastElementChild.insertAdjacentHTML('beforeend', `
+        <li><input tabindex="2" type="checkbox" class="checkbox"/>${tag}</li>
+      `)
+    });
+    filterWrapper.lastElementChild.insertAdjacentHTML('beforeend', `
+      <li class="display-filtered-recipes-button"><button tabindex="2" class="filter-recipe-by-type-button">Filter By Type</button></li>
+    `);
+  }
 }
 
 const getFilteredRecipes = (e) => {
@@ -186,7 +206,7 @@ const getFilteredRecipes = (e) => {
   return filteredRecipes;
 }
 
-const getFilterByTypeResults = () => {
+const displayFilterByTypeResults = (e) => {
   let allFilteredRecipes;
   recipesWrapper.innerHTML = '';
   recipeData.forEach(recipe => {
@@ -211,6 +231,31 @@ const getFilterByTypeResults = () => {
       `);
     });
   });
+}
+
+const getTagNames = (e) => {
+  tagNames.push(e.target.parentElement.innerText)
+  return tagNames;
+}
+
+const displayfilteredFavoriteRecipesByType = () => {
+  recipesWrapper.innerHTML = '';
+  tagNames.forEach(tag => {
+    user.filterFavoriteRecipes(tag).forEach(recipe => {
+      recipesWrapper.insertAdjacentHTML('afterbegin', `
+        <article class="recipe-card" id=${recipe.id}>
+        <section class="recipe-card-header">
+         <button tabindex="2" type="button" class="add-recipe-icon"></button>
+         <button tabindex="2" type="button" class="favorite-recipe-icon-active"></button>
+        </section>
+        <p class="recipe-name">${recipe.name}</p>
+        <section tabindex="2" class="recipe-card-main">
+         <img class="recipe-image" src="${recipe.image}" alt="Picture of ${recipe.name}">
+        </section>
+        </article>
+     `);
+   });
+ });
 }
 
 const removeWrappersInnerHtml = () => {
@@ -239,8 +284,16 @@ const eventHandler = (e) => {
   } else if (e.target.classList.contains('checkbox')) {
     getFilteredRecipes(e);
   } else if (e.target.classList.contains('filter-recipe-by-type-button')) {
-    getFilterByTypeResults(e);
+    displayFilterByTypeResults(e);
+  } else if (e.target.classList.contains('filter-favorite-recipes-button')) {
+    displayFilterTypeOptions(e);
+
+  } else if (e.target.classList.contains('filter-favorite-recipe-by-type-button')) {
+    displayfilteredFavoriteRecipesByType(e);
+  } else if (e.target.classList.contains('favorited-checkbox')) {
+    getTagNames(e);
   }
 }
+
 
 body.addEventListener('click', eventHandler);
