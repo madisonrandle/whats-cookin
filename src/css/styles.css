@@ -67,7 +67,8 @@ h2,
 .favorite-recipe-icon-inactive,
 .favorite-recipe-icon-active,
 .remove-recipe-icon,
-.remove-recipe-icon:hover {
+.remove-recipe-icon:hover,
+.filter-recipe-by-type-button:hover {
   cursor: pointer;
 }
 
@@ -232,6 +233,10 @@ main {
 
 .type-checklist input {
   cursor: pointer;
+}
+
+.hidden {
+  display: none;
 }
 
 //
