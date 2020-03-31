@@ -84,17 +84,31 @@ const getFavoriteFilteredRecipes = (e) => {
 }
 
 const getToCookThisWeekFilteredRecipes = (e) => {
-  console.log();
   let filtered = filteredTagTypes.reduce((acc, tag) => {
     currentUser.filterRecipesToCook(tag).forEach(recipe => {
       !acc.includes(recipe) && acc.push(recipe);
     });
     return acc.sort((a, b) => a.id - b.id);
   }, []);
-  console.log(filtered);
   domUpdatesCookThisWeekPage.filterResults(filtered);
   domUpdatesCookThisWeekPage.filter();
   filteredTagTypes = [];
+}
+
+const getSearchInput = (e) => {
+  const filteredSearchInput = e.target.nextElementSibling.value;
+
+  let filteredRecipesBySearchInput = recipeData.reduce((acc, recipe) => {
+    recipe.ingredients.forEach(ingredient => {
+      ingredientsData.forEach(ingredientData => {
+        if (ingredient.id === ingredientData.id && ingredientData.name.includes(filteredSearchInput) && !acc.includes(recipe)) {
+          acc.push(recipe);
+        };
+      });
+    });
+    return acc;
+  }, []);
+  domUpdatesHomePage.searchByIngredientResult(filteredRecipesBySearchInput);
 }
 
 pageLoad();
@@ -126,9 +140,11 @@ const eventHandler = (e) => {
   } else if (e.target.classList.contains('filter-this-week-recipes-button')) {
       domUpdatesTagTypeListItems.thisWeekRecipes(e, getRecipeTypes());
   } else if (e.target.classList.contains('filter-favorite-recipes-by-type-button')) {
-    getFavoriteFilteredRecipes(e);
+      getFavoriteFilteredRecipes(e);
   } else if (e.target.classList.contains('filter-this-week-recipes-by-type-button')) {
-    getToCookThisWeekFilteredRecipes(e);
+      getToCookThisWeekFilteredRecipes(e);
+  } else if (e.target.classList.contains('search-icon')) {
+      getSearchInput(e);
   }
 }
 
