@@ -83,6 +83,28 @@ const domUpdatesHomePage = {
     });
   },
 
+  searchByIngredientResult: (recipes) => {
+    main.innerHTML = '';
+    header.nextElementSibling.innerHTML = '';
+    header.nextElementSibling.insertAdjacentHTML('beforeend', `
+      <h3>Ingredient Search Results</h3>
+    `);
+    recipes.forEach(recipe => {
+      main.insertAdjacentHTML('afterbegin', `
+        <article class="recipe-card" id=${recipe.id}>
+          <section class="recipe-card-header">
+            <button tabindex="2" type="button" class="add-recipe-icon handle-recipes-this-week"></button>
+            <button tabindex="2" type="button" class="favorite-recipe-icon-inactive favorite-recipe-icon-active handle-users-data"></button>
+          </section>
+          <p class="recipe-name">${recipe.name}</p>
+          <section tabindex="2" class="recipe-card-main">
+            <img class="recipe-image" src="${recipe.image}" alt="Picture of ${recipe.name}">
+          </section>
+        </article>
+      `);
+    });
+  },
+
   recipes: (currentUser, e) => {
     let favoritesButtonElement;
     reset.html();
@@ -241,7 +263,6 @@ const domUpdates = {
   },
 
   removeRecipeCard: (e) => {
-    console.log('here');
     e.target.closest('.recipe-card').remove();
     domUpdates.favoriteButton(e);
   },
@@ -257,8 +278,6 @@ const reset = {
     main.innerHTML = '';
     header.nextElementSibling.innerHTML = '';
   },
-
-
 }
 
 const domUpdatesHandler = {
