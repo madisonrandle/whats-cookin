@@ -19,7 +19,7 @@ body {
   padding: 1.5rem;
 }
 
-.my-recipes {
+.sub-header {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -90,8 +90,7 @@ h2,
 }
 
 /* NAV BUTTONS */
-.nav-buttons-wrapper,
-.my-recipes-nav-buttons-wrapper {
+.nav-buttons-wrapper {
   display: flex;
   flex-flow: wrap;
   justify-content: space-around;
