@@ -24,15 +24,11 @@ class User {
   }
 
   filterFavoriteRecipes(recipeTag) {
-    return this.favoriteRecipes.filter(recipe => {
-      return recipe.tags.includes(recipeTag);
-    });
+    return this.favoriteRecipes.filter(recipe => recipe.tags.includes(recipeTag));
   }
 
   filterRecipesToCook(recipeTag) {
-    return this.recipesToCook.filter(recipe => {
-      return recipe.tags.includes(recipeTag);
-    });
+    return this.recipesToCook.filter(recipe => recipe.tags.includes(recipeTag));
   }
 
   findFavorites(searchContent) {
