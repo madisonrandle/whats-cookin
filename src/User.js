@@ -31,6 +31,7 @@ class User {
     return this.recipesToCook.filter(recipe => recipe.tags.includes(recipeTag));
   }
 
+  //change test potentially
   findFavorites(searchContent) {
     return this.favoriteRecipes.filter(recipe => {
       return recipe.name.includes(searchContent)
