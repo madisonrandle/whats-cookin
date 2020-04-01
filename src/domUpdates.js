@@ -317,7 +317,6 @@ const domUpdates = {
   },
 
   removeRecipeCard: (e) => {
-    console.log('here');
     e.target.closest('.recipe-card').remove();
     domUpdates.favoriteButton(e);
   },
@@ -326,6 +325,20 @@ const domUpdates = {
     e.target.disabled = true;
   },
 
+}
+
+const domUpdatesRecipeCardInfo = {
+ card: (e) => {
+   main.previousElementSibling.classList.add('hidden');
+   main.classList.add('hidden');
+   let recipeCardID = e.target.closest('.recipe-card').id;
+   main.insertAdjacentHTML('afterend', `
+    <section class="card-info-wrapper">
+      <div class="card-info">
+      </div>
+    </section>
+   `);
+  },
 }
 
 const reset = {
@@ -343,6 +356,8 @@ const domUpdatesHandler = {
         domUpdates.removeRecipeCard(e);
     } else if (e.target.classList.contains('favorite-recipe-icon-active')) {
         domUpdates.favoriteButton(e);
+    } else if (e.target.classList.contains('recipe-image')) {
+        domUpdatesRecipeCardInfo.card(e);
     }
   },
 }
