@@ -2,6 +2,7 @@ const header = document.querySelector('.home-page-header');
 const main = document.querySelector('main');
 const filterWrapper = document.querySelector('.filter-by-type-wrapper');
 const filterButton = document.querySelector('.filter-button');
+const searchWrapper = document.querySelector('.recipe-search-input-wrapper');
 
 const domUpdatesHeader = {
   userName: (userData) => {
@@ -52,6 +53,14 @@ const domUpdatesTagTypeListItems = {
 }
 
 const domUpdatesHomePage = {
+  search: (e) => {
+    searchWrapper.innerHTML = '';
+    searchWrapper.insertAdjacentHTML('afterbegin', `
+      <button tabindex="2" type="button" class="search-icon-home"></button>
+      <input tabindex="1" class="recipe-search-input" type="text" value="search recipes by ingredient" onfocus="this.value=''">
+    `);
+  },
+
   filter: (e) => {
     filterWrapper.innerHTML = '';
     filterWrapper.insertAdjacentHTML('afterbegin', `
@@ -64,6 +73,7 @@ const domUpdatesHomePage = {
 
   filterResults: (e, filteredTagTypes) => {
     main.innerHTML = '';
+    header.nextElementSibling.innerHTML = '';
     header.nextElementSibling.insertAdjacentHTML('beforeend', `
       <h3>Filtered Recipes</h3>
     `);
@@ -71,8 +81,8 @@ const domUpdatesHomePage = {
       main.insertAdjacentHTML('afterbegin', `
         <article class="recipe-card" id=${recipe.id}>
           <section class="recipe-card-header">
-            <button tabindex="2" type="button" class="add-recipe-icon"></button>
-            <button tabindex="2" type="button" class="favorite-recipe-icon-inactive favorite-recipe-icon-active"></button>
+            <button tabindex="2" type="button" class="add-recipe-icon handle-recipes-this-wee"></button>
+            <button tabindex="2" type="button" class="favorite-recipe-icon-inactive favorite-recipe-icon-active handle-users-data"></button>
           </section>
           <p class="recipe-name">${recipe.name}</p>
           <section tabindex="2" class="recipe-card-main">
@@ -83,11 +93,11 @@ const domUpdatesHomePage = {
     });
   },
 
-  searchByIngredientResult: (recipes) => {
+  searchResults: (recipes) => {
     main.innerHTML = '';
     header.nextElementSibling.innerHTML = '';
     header.nextElementSibling.insertAdjacentHTML('beforeend', `
-      <h3>Ingredient Search Results</h3>
+      <h3>Search Results</h3>
     `);
     recipes.forEach(recipe => {
       main.insertAdjacentHTML('afterbegin', `
@@ -144,10 +154,40 @@ const domUpdatesHomePage = {
 }
 
 const domUpdatesFavoritesPage = {
+  search: (e) => {
+    searchWrapper.innerHTML = '';
+    searchWrapper.insertAdjacentHTML('afterbegin', `
+      <button tabindex="2" type="button" class="search-icon-favorites"></button>
+      <input tabindex="1" class="recipe-search-input" type="text" value="search recipes by ingredient/name" onfocus="this.value=''">
+    `);
+  },
+
+  searchResults: (recipes) => {
+    main.innerHTML = '';
+    header.nextElementSibling.innerHTML = '';
+    header.nextElementSibling.insertAdjacentHTML('beforeend', `
+      <h3>Search Results: Ingredient || Recipe Name </h3>
+    `);
+    recipes.forEach(recipe => {
+      main.insertAdjacentHTML('afterbegin', `
+        <article class="recipe-card" id=${recipe.id}>
+          <section class="recipe-card-header">
+            <button tabindex="2" type="button" class="add-recipe-icon"></button>
+            <button tabindex="2" type="button" class="favorite-recipe-icon-active handle-favorites handle-users-data"></button>
+          </section>
+          <p class="recipe-name">${recipe.name}</p>
+          <section tabindex="2" class="recipe-card-main">
+            <img class="recipe-image" src="${recipe.image}" alt="Picture of ${recipe.name}">
+          </section>
+        </article>
+      `);
+    });
+  },
+
   filter: (e) => {
     filterWrapper.innerHTML = '';
     filterWrapper.insertAdjacentHTML('afterbegin', `
-      <button tabindex="2" type="submit" class="filter-favorite-recipes-button">Filter Recipes</button>
+      <button tabindex="2" type="submit" class="filter-favorite-recipes-button">Filter Favorite Recipes</button>
     `);
     filterWrapper.insertAdjacentHTML('beforeend', `
       <ul class="type-checklist"></ul>
@@ -156,6 +196,7 @@ const domUpdatesFavoritesPage = {
 
   filterResults: (filtered) => {
     main.innerHTML = '';
+    header.nextElementSibling.innerHTML = '';
     header.nextElementSibling.insertAdjacentHTML('beforeend', `
         <h3>Filtered Recipes</h3>
     `);
@@ -201,10 +242,22 @@ const domUpdatesFavoritesPage = {
 }
 
 const domUpdatesCookThisWeekPage = {
+  search: (e) => {
+    searchWrapper.innerHTML = '';
+    searchWrapper.insertAdjacentHTML('afterbegin', `
+      <button tabindex="2" type="button" class="search-icon-this-week"></button>
+      <input tabindex="1" class="recipe-search-input" type="text" value="search recipes by ingredient" onfocus="this.value=''">
+    `);
+  },
+
+  searchResults: (e) => {
+
+  },
+
   filter: (e) => {
     filterWrapper.innerHTML = '';
     filterWrapper.insertAdjacentHTML('beforeend', `
-      <button tabindex="2" type="submit" class="filter-this-week-recipes-button filter-button">Filter Recipes</button>
+      <button tabindex="2" type="submit" class="filter-this-week-recipes-button filter-button">Filter Recipes This Week</button>
     `);
     filterWrapper.insertAdjacentHTML('beforeend', `
       <ul class="type-checklist"></ul>
@@ -213,6 +266,7 @@ const domUpdatesCookThisWeekPage = {
 
   filterResults: (filtered) => {
     main.innerHTML = '';
+    header.nextElementSibling.innerHTML = '';
     header.nextElementSibling.insertAdjacentHTML('beforeend', `
       <h3>Filtered Recipes</h3>
     `);
@@ -263,6 +317,7 @@ const domUpdates = {
   },
 
   removeRecipeCard: (e) => {
+    console.log('here');
     e.target.closest('.recipe-card').remove();
     domUpdates.favoriteButton(e);
   },
