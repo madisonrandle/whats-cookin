@@ -33,12 +33,26 @@ class User {
 
   //change test potentially
   findFavorites(searchContent) {
-    return this.favoriteRecipes.filter(recipe => {
-      return recipe.name.includes(searchContent)
-      || recipe.ingredients.find(ingredient => {
-        return ingredient.name.includes(searchContent)
+    let ingredientSearch = ingredientsData.reduce((acc, ingredient) => {
+      this.favoriteRecipes.forEach(recipe => {
+        recipe.ingredients.forEach(recipeIngredient => {
+          if (recipeIngredient.id === ingredient.id && !acc.includes(ingredient.name)) {
+            acc.push(ingredient.name);
+          }
         });
-    });
+      });
+      return acc;
+    }, []);
+
+    return this.favoriteRecipes.reduce((acc, recipe) => {
+      if (recipe.name.toLowerCase().includes(searchContent) || ingredientSearch.includes(searchContent) && !acc.includes(recipe)) {
+        acc.push(recipe)
+      }
+      return acc;
+    }, []);
+
+
+
   }
 }
 
