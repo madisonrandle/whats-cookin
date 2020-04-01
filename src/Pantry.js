@@ -45,4 +45,3 @@ if (typeof module !== 'undefined') {
   module.exports = Pantry;
 }
 
-// Pantry - canPantryCookSpecifiedMeal, determineIngredientSuppyForSpecificMeal
