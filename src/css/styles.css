@@ -52,7 +52,9 @@ h2,
   min-width: 20rem;
 }
 
-.search-icon {
+.search-icon-home,
+.search-icon-favorites,
+.search-icon-this-week {
   background: url(../images/search.svg);
   background-position: center;
   background-repeat: no-repeat;
@@ -62,7 +64,9 @@ h2,
   width: 1.5rem;
 }
 
-.search-icon:hover,
+.search-icon-home:hover,
+.search-icon-favorites:hover,
+.search-icon-this-week:hover,
 .add-recipe-icon,
 .favorite-recipe-icon-inactive,
 .favorite-recipe-icon-active,
