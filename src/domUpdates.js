@@ -77,6 +77,7 @@ const domUpdatesHomePage = {
 
   filterResults: (e, filteredTagTypes) => {
     main.innerHTML = '';
+    main.nextElementSibling.classList.add('hidden');
     header.nextElementSibling.innerHTML = '';
     header.nextElementSibling.insertAdjacentHTML('beforeend', `
       <h3>Filtered Recipes</h3>
@@ -99,6 +100,7 @@ const domUpdatesHomePage = {
 
   searchResults: (recipes) => {
     main.innerHTML = '';
+    main.nextElementSibling.classList.add('hidden');
     header.nextElementSibling.innerHTML = '';
     header.nextElementSibling.insertAdjacentHTML('beforeend', `
       <h3>Search Results</h3>
@@ -168,6 +170,7 @@ const domUpdatesFavoritesPage = {
 
   searchResults: (recipes) => {
     main.innerHTML = '';
+    main.nextElementSibling.classList.add('hidden');
     header.nextElementSibling.innerHTML = '';
     header.nextElementSibling.insertAdjacentHTML('beforeend', `
       <h3>Search Results</h3>
@@ -200,6 +203,7 @@ const domUpdatesFavoritesPage = {
 
   filterResults: (filtered) => {
     main.innerHTML = '';
+    main.nextElementSibling.classList.add('hidden');
     header.nextElementSibling.innerHTML = '';
     header.nextElementSibling.insertAdjacentHTML('beforeend', `
         <h3>Filtered Recipes</h3>
@@ -255,10 +259,6 @@ const domUpdatesCookThisWeekPage = {
     `);
   },
 
-  // searchResults: (e) => {
-  //
-  // },
-
   filter: (e) => {
     filterWrapper.innerHTML = '';
     filterWrapper.insertAdjacentHTML('beforeend', `
@@ -271,6 +271,7 @@ const domUpdatesCookThisWeekPage = {
 
   filterResults: (filtered) => {
     main.innerHTML = '';
+    main.nextElementSibling.classList.add('hidden');
     header.nextElementSibling.innerHTML = '';
     header.nextElementSibling.insertAdjacentHTML('beforeend', `
       <h3>Filtered Recipes</h3>
@@ -387,7 +388,7 @@ const domUpdatesRecipeCardInfo = {
   ingredientsNeeded: (ingredients, pantry) => {
     ingredientsNeededWrapper.innerHTML = '';
     ingredientsNeededWrapper.insertAdjacentHTML('afterbegin', `
-      <p class="user-needs">To cook this recipe, you need:</p>
+      <p class="user-needs">You need the following ingredients to cook this recipe:</p>
       <ul></ul>
     `);
 

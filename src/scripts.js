@@ -36,14 +36,13 @@ const findRecipeID = (e) => {
   return parseInt(e.target.closest('.recipe-card').id);
 }
 
-// User class
 const updateUsersFavorites = (e) => {
   let foundRecipe = recipeData.find(recipe => recipe.id === findRecipeID(e));
   !e.target.classList.contains('favorite-recipe-icon-inactive') ?
     currentUser.addRecipeToFavorites(foundRecipe) :
       currentUser.removeRecipeFromFavorites(foundRecipe);
 }
-// User class
+
 const updateUsersRecipesThisWeek = (e) => {
   let foundRecipe = recipeData.find(recipe => recipe.id === findRecipeID(e));
   !currentUser.recipesToCook.includes(foundRecipe) ?
@@ -76,7 +75,6 @@ const getAllFilteredRecipes = (e) => {
   filteredTagTypes = [];
 }
 
-// User class
 const getFavoriteFilteredRecipes = (e) => {
   let filtered = filteredTagTypes.reduce((acc, tag) => {
     currentUser.filterFavoriteRecipes(tag).forEach(recipe => {
@@ -88,7 +86,7 @@ const getFavoriteFilteredRecipes = (e) => {
   domUpdatesFavoritesPage.filter();
   filteredTagTypes = [];
 }
-// User class
+
 const getToCookThisWeekFilteredRecipes = (e) => {
   let filtered = filteredTagTypes.reduce((acc, tag) => {
     currentUser.filterRecipesToCook(tag).forEach(recipe => {
@@ -116,7 +114,7 @@ const getSearchInput = (e) => {
 
   domUpdatesHomePage.searchResults(filteredRecipesBySearchInput);
 }
-// User class
+
 const getFavoritesSearchInput = (e) => {
   const filteredSearchInput = e.target.nextElementSibling.value;
   filteredRecipesBySearchInput = currentUser.findFavorites(filteredSearchInput);
@@ -131,8 +129,6 @@ const getThisWeekSearchInput = (e) => {
 const getRecipeInfo = (e) => {
   let recipeCardID = e.target.closest('.recipe-card').id;
   let foundRecipe = recipeData.find(recipe => recipe.id === parseInt(recipeCardID));
-
-
   let userPantryInfo = pantry.canUserPantryCookSelectedMeal(foundRecipe);
   let recipeCost = cookbook.calculateCost(foundRecipe);
   domUpdatesRecipeCardInfo.card(foundRecipe, userPantryInfo);

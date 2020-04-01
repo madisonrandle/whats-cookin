@@ -50,9 +50,6 @@ class User {
       }
       return acc;
     }, []);
-
-
-
   }
 }
 
