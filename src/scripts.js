@@ -121,6 +121,7 @@ const getThisWeekSearchInput = (e) => {
   const filteredSearchInput = e.target.nextElementSibling.value;
 }
 
+
 pageLoad();
 
 const eventHandler = (e) => {
