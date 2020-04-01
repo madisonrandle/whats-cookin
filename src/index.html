@@ -5,37 +5,33 @@
     <meta charset="UTF-8">
     <title>What's Cookin'</title>
   </head>
+  <header class="home-page-header">
+    <div class="title-and-greeting-wrapper">
+      <h1>What's Cookin'</h1>
+    </div>
+    <div class="recipe-search-input-wrapper">
+    </div>
+    <div class="nav-buttons-wrapper">
+      <button tabindex="2" class="home-button" type="button">All Recipes</button>
+      <button tabindex="2" class="view-favorites-button" type="button">Favorites</button>
+      <button tabindex="2" class="this-week-button" type="button">To Cook</button>
+      <button tabindex="2" class="pantry-button" type="button">Pantry</button>
+    </div>
+    <section class="filter-by-type-wrapper"></section>
+  </header>
   <body>
-    <header class="home-page-header">
-      <div class="title-and-greeting-wrapper">
-        <h1>What's Cookin'</h1>
-      </div>
-      <div class="recipe-search-input-wrapper">
-        <button tabindex="2" type="button" class="search-icon"></button>
-        <input tabindex="1" class="recipe-search-input" type="text" value="search recipes" onfocus="this.value=''">
-      </div>
-      <div class="nav-buttons-wrapper">
-        <button tabindex="2" class="home-button" type="button">Home</button>
-        <button tabindex="2" class="view-favorites-button" type="button">My Recipes</button>
-        <button tabindex="2" class="pantry-button" type="button">Pantry</button>
-      </div>
-    </header>
-    <!-- <section class="my-recipes">
-      <h1>My Recipes</h1>
-      <div class="my-recipes-nav-buttons-wrapper">
-        <button tabindex="2" class="all-recipes-button" type="button">All Recipes</button>
-      </div>
-    </section> -->
+    <section class="sub-header">
+    </section>
     <main></main>
   </body>
-  <script type="text/javascript" src="../data/users.js"></script>
+  <script type="text/javascript" src="../data/ingredients.js"></script>
   <script type="text/javascript" src="../data/recipes.js"></script>
+  <script type="text/javascript" src="../data/users.js"></script>
   <script type="text/javascript" src="./Cookbook.js"></script>
   <script type="text/javascript" src="./User.js"></script>
   <script type="text/javascript" src="./Pantry.js"></script>
   <script type="text/javascript" src="./Recipe.js"></script>
-
-
+  <script type="text/javascript" src="./domUpdates.js"></script>
   <script type="text/javascript" src="./scripts.js"></script>
 
 </html>
