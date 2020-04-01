@@ -3,6 +3,10 @@ const main = document.querySelector('main');
 const filterWrapper = document.querySelector('.filter-by-type-wrapper');
 const filterButton = document.querySelector('.filter-button');
 const searchWrapper = document.querySelector('.recipe-search-input-wrapper');
+const instructionsWrapper = document.querySelector('.instructions');
+const ingredientsWrapper = document.querySelector('.ingredients');
+const ingredientsNeededWrapper = document.querySelector('.ingredients-needed-to-cook');
+const recipeCostWrapper = document.querySelector('.recipe-cost');
 
 const domUpdatesHeader = {
   userName: (userData) => {
@@ -81,7 +85,7 @@ const domUpdatesHomePage = {
       main.insertAdjacentHTML('afterbegin', `
         <article class="recipe-card" id=${recipe.id}>
           <section class="recipe-card-header">
-            <button tabindex="2" type="button" class="add-recipe-icon handle-recipes-this-wee"></button>
+            <button tabindex="2" type="button" class="add-recipe-icon handle-recipes-this-week"></button>
             <button tabindex="2" type="button" class="favorite-recipe-icon-inactive favorite-recipe-icon-active handle-users-data"></button>
           </section>
           <p class="recipe-name">${recipe.name}</p>
@@ -166,13 +170,13 @@ const domUpdatesFavoritesPage = {
     main.innerHTML = '';
     header.nextElementSibling.innerHTML = '';
     header.nextElementSibling.insertAdjacentHTML('beforeend', `
-      <h3>Search Results: Ingredient || Recipe Name </h3>
+      <h3>Search Results</h3>
     `);
     recipes.forEach(recipe => {
       main.insertAdjacentHTML('afterbegin', `
         <article class="recipe-card" id=${recipe.id}>
           <section class="recipe-card-header">
-            <button tabindex="2" type="button" class="add-recipe-icon"></button>
+            <button tabindex="2" type="button" class="add-recipe-icon handle-recipes-this-week"></button>
             <button tabindex="2" type="button" class="favorite-recipe-icon-active handle-favorites handle-users-data"></button>
           </section>
           <p class="recipe-name">${recipe.name}</p>
@@ -204,7 +208,7 @@ const domUpdatesFavoritesPage = {
       main.insertAdjacentHTML('afterbegin', `
         <article class="recipe-card" id=${recipe.id}>
           <section class="recipe-card-header">
-            <button tabindex="2" type="button" class="add-recipe-icon"></button>
+            <button tabindex="2" type="button" class="add-recipe-icon handle-recipes-this-week"></button>
             <button tabindex="2" type="button" class="favorite-recipe-icon-active handle-favorites handle-users-data"></button>
           </section>
           <p class="recipe-name">${recipe.name}</p>
@@ -224,11 +228,12 @@ const domUpdatesFavoritesPage = {
   },
 
   favoriteRecipes: (e, currentUser) => {
+    main.nextElementSibling.classList.add('hidden');
     currentUser.favoriteRecipes.forEach(recipe => {
       main.insertAdjacentHTML('afterbegin', `
         <article class="recipe-card" id=${recipe.id}>
           <section class="recipe-card-header">
-            <button tabindex="2" type="button" class="add-recipe-icon"></button>
+            <button tabindex="2" type="button" class="add-recipe-icon handle-recipes-this-week"></button>
             <button tabindex="2" type="button" class="favorite-recipe-icon-active handle-favorites handle-users-data"></button>
           </section>
           <p class="recipe-name">${recipe.name}</p>
@@ -250,14 +255,14 @@ const domUpdatesCookThisWeekPage = {
     `);
   },
 
-  searchResults: (e) => {
-
-  },
+  // searchResults: (e) => {
+  //
+  // },
 
   filter: (e) => {
     filterWrapper.innerHTML = '';
     filterWrapper.insertAdjacentHTML('beforeend', `
-      <button tabindex="2" type="submit" class="filter-this-week-recipes-button filter-button">Filter Recipes This Week</button>
+      <button tabindex="2" type="submit" class="filter-this-week-recipes-button filter-button" disabled>Filter Recipes This Week</button>
     `);
     filterWrapper.insertAdjacentHTML('beforeend', `
       <ul class="type-checklist"></ul>
@@ -294,6 +299,7 @@ const domUpdatesCookThisWeekPage = {
   },
 
   recipesToCook: (e, currentUser) => {
+    main.nextElementSibling.classList.add('hidden');
     currentUser.recipesToCook.forEach(recipe => {
       main.insertAdjacentHTML('afterbegin', `
         <article class="recipe-card" id=${recipe.id}>
@@ -328,23 +334,100 @@ const domUpdates = {
 }
 
 const domUpdatesRecipeCardInfo = {
- card: (e) => {
-   main.previousElementSibling.classList.add('hidden');
-   main.classList.add('hidden');
-   let recipeCardID = e.target.closest('.recipe-card').id;
-   main.insertAdjacentHTML('afterend', `
-    <section class="card-info-wrapper">
-      <div class="card-info">
-      </div>
-    </section>
+ card: (recipe, pantry) => {
+   main.innerHTML = '';
+   main.nextElementSibling.classList.remove('hidden');
+   instructionsWrapper.innerHTML = '';
+   ingredientsWrapper.innerHTML = '';
+   instructionsWrapper.parentElement.parentElement.firstElementChild.innerHTML = '';
+   instructionsWrapper.parentElement.parentElement.firstElementChild.insertAdjacentHTML('afterbegin', `
+     <h2 class="card-info-header">${recipe.name}</h2>
    `);
+
+   instructionsWrapper.insertAdjacentHTML('afterbegin', `
+      <p class="info-titles">Instructions</p>
+      <ol class="instructions-list"></ol>
+   `);
+
+   ingredientsWrapper.insertAdjacentHTML('afterbegin', `
+      <p class="info-titles">Ingredients</p>
+      <ul class="ingredients-list"></ul>
+   `);
+
+    domUpdatesRecipeCardInfo.instructionsList(recipe.instructions);
+    domUpdatesRecipeCardInfo.ingredientsList(recipe.ingredients);
+    domUpdatesRecipeCardInfo.ingredientsNeeded(recipe.ingredients, pantry);
+    domUpdatesRecipeCardInfo.recipeCost(recipe.ingredients);
   },
+
+  instructionsList: (instructions) => {
+    instructions.forEach(instruction => {
+      instructionsWrapper.lastElementChild.insertAdjacentHTML('afterbegin', `
+        <li class="instructions-list-items">${instruction.instruction}</li>
+      `);
+    });
+
+  },
+
+  ingredientsList: (ingredients) => {
+    ingredientsData.forEach(ingredient => {
+      ingredients.forEach(ingredientInfo => {
+        let amount = ingredientInfo.quantity.amount;
+        if (!Number.isInteger(amount)) {
+          amount = amount.toFixed(1);
+        };
+        ingredient.id === ingredientInfo.id &&
+          ingredientsWrapper.lastElementChild.insertAdjacentHTML('afterbegin', `
+            <li class="ingredients-list-items">${amount} ${ingredientInfo.quantity.unit} ${ingredient.name}</li>
+          `);
+      });
+    });
+  },
+
+  ingredientsNeeded: (ingredients, pantry) => {
+    ingredientsNeededWrapper.innerHTML = '';
+    ingredientsNeededWrapper.insertAdjacentHTML('afterbegin', `
+      <p class="user-needs">To cook this recipe, you need:</p>
+      <ul></ul>
+    `);
+
+    domUpdatesRecipeCardInfo.ingredientItemsNeeded(pantry);
+  },
+
+  ingredientItemsNeeded: (pantry) => {
+    if (pantry.missing.length > 0) {
+      pantry.missing.forEach(item => {
+        let amount = item.amount;
+        if (!Number.isInteger(amount)) {
+          amount = amount.toFixed(1);
+        };
+        ingredientsNeededWrapper.lastElementChild.insertAdjacentHTML('afterbegin', `
+          <li class="items-needed-li">${amount} ${item.unit} ${item.name}</li>
+        `);
+      });
+    } else {
+      ingredientsNeededWrapper.innerHTML = '';
+      ingredientsNeededWrapper.insertAdjacentHTML('afterbegin', `
+        <p>You have everything you need to cook this recipe!</p>
+      `);
+
+    }
+  },
+
+  recipeCost: (cost) => {
+    recipeCostWrapper.innerHTML = `
+      <p class="user-needs">Total Recipe Cost: ${cost}</p>
+      <p class="user-needs">Cost of Ingredients You Need: $$</p>
+    `;
+  },
+
 }
 
 const reset = {
   html: () => {
-    main.innerHTML = '';
     header.nextElementSibling.innerHTML = '';
+    main.innerHTML = '';
+    main.nextElementSibling.classList.add('hidden');
   },
 }
 
@@ -356,8 +439,6 @@ const domUpdatesHandler = {
         domUpdates.removeRecipeCard(e);
     } else if (e.target.classList.contains('favorite-recipe-icon-active')) {
         domUpdates.favoriteButton(e);
-    } else if (e.target.classList.contains('recipe-image')) {
-        domUpdatesRecipeCardInfo.card(e);
     }
   },
 }
