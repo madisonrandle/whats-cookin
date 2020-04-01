@@ -15,6 +15,7 @@ const pageLoad = () => {
   let usersData = findRandomUser();
   currentUser = new User(usersData);
   domUpdatesHeader.userName(usersData);
+  domUpdatesHomePage.search();
   domUpdatesHomePage.filter();
   domUpdatesHomePage.recipes(currentUser);
 }
@@ -67,7 +68,7 @@ const getAllFilteredRecipes = (e) => {
   return acc.sort((a, b) => a.id - b.id);
   }, []);
   domUpdatesHomePage.filterResults();
-  domUpdatesHomePage.filter()
+  domUpdatesHomePage.filter();
   filteredTagTypes = [];
 }
 
@@ -97,7 +98,6 @@ const getToCookThisWeekFilteredRecipes = (e) => {
 
 const getSearchInput = (e) => {
   const filteredSearchInput = e.target.nextElementSibling.value;
-
   let filteredRecipesBySearchInput = recipeData.reduce((acc, recipe) => {
     recipe.ingredients.forEach(ingredient => {
       ingredientsData.forEach(ingredientData => {
@@ -108,17 +108,29 @@ const getSearchInput = (e) => {
     });
     return acc;
   }, []);
-  domUpdatesHomePage.searchByIngredientResult(filteredRecipesBySearchInput);
+  domUpdatesHomePage.searchResults(filteredRecipesBySearchInput);
+}
+
+const getFavoritesSearchInput = (e) => {
+  const filteredSearchInput = e.target.nextElementSibling.value;
+  filteredRecipesBySearchInput = currentUser.findFavorites(filteredSearchInput);
+  domUpdatesFavoritesPage.searchResults(filteredRecipesBySearchInput);
+}
+
+const getThisWeekSearchInput = (e) => {
+  const filteredSearchInput = e.target.nextElementSibling.value;
 }
 
 pageLoad();
 
 const eventHandler = (e) => {
   if (e.target.classList.contains('view-favorites-button')) {
+    domUpdatesFavoritesPage.search(e);
     domUpdatesFavoritesPage.filter(e);
     domUpdatesFavoritesPage.subHeader(e);
     domUpdatesFavoritesPage.favoriteRecipes(e, currentUser);
   } else if (e.target.classList.contains('this-week-button')) {
+      domUpdatesCookThisWeekPage.search(e);
       domUpdatesCookThisWeekPage.filter(e);
       domUpdatesCookThisWeekPage.subHeader(e);
       domUpdatesCookThisWeekPage.recipesToCook(e, currentUser);
@@ -143,8 +155,12 @@ const eventHandler = (e) => {
       getFavoriteFilteredRecipes(e);
   } else if (e.target.classList.contains('filter-this-week-recipes-by-type-button')) {
       getToCookThisWeekFilteredRecipes(e);
-  } else if (e.target.classList.contains('search-icon')) {
+  } else if (e.target.classList.contains('search-icon-home')) {
       getSearchInput(e);
+  } else if (e.target.classList.contains('search-icon-favorites')) {
+      getFavoritesSearchInput(e);
+  } else if (e.target.classList.contains('search-icon-this-week')) {
+      getThisWeekSearchInput(e);
   }
 }
 
