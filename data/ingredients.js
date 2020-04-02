@@ -18,6 +18,7 @@ let ingredientsData = [
     "id": 19335,
     "name": "sucrose",
     "estimatedCostInCents": 902
+    
   },
   {
     "id": 19206,
