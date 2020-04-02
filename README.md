@@ -15,11 +15,11 @@ This is one of our Pair Projects during our time at [Turing School of Software a
 4. Run ```open src/index.html``` in the terminal to see the HTML page.
 
 ## Instructions
-1. App Instructions...
-2. App Instructions...
-3. App Instructions...
-4. App Instructions...
-5. App Instructions...
+1. You can filter the recipes by clicking the "Filter Recipes" button under the username in the top left. From there you can choose to filter for any of the tags that are associated with each recipe.
+2. You can search for a recipe by name or ingredient by clicking in the search bar in at the top then clicking the magnifying glass.
+3. You can view a recipe's full information including complete ingredient list, preparation instructions, total recipe cost as well as cost/required ingredients for each user. 
+4. You have the ability to favorite a recipe by clicking on the heart icon in the top right of each recipe card. Then you can click the "Favorites" button in the top right to view just your favorited receipes. 
+5. If you click the plus icon in the top left of the recipe cards then you can add these recipes to those you wish to cook. You can view only the selected recipes by clicking the "To Cook" button in the top right.
 
 ## App Screenshots
 ### Home Page
