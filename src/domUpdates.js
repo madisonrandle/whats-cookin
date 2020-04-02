@@ -399,11 +399,13 @@ const domUpdatesRecipeCardInfo = {
     if (pantry.missing.length > 0) {
       pantry.missing.forEach(item => {
         let amount = item.amount;
+        let itemCost = item.cost;
+
         if (!Number.isInteger(amount)) {
           amount = amount.toFixed(1);
         };
         ingredientsNeededWrapper.lastElementChild.insertAdjacentHTML('afterbegin', `
-          <li class="items-needed-li">${amount} ${item.unit} ${item.name}</li>
+          <li class="items-needed-li">${amount} ${item.unit} ${item.name} </li>
         `);
       });
     } else {
@@ -415,10 +417,11 @@ const domUpdatesRecipeCardInfo = {
     }
   },
 
-  recipeCost: (cost) => {
+  recipeCost: (dollars, cost) => {
+    console.log();
     recipeCostWrapper.innerHTML = `
       <p class="user-needs">Total Recipe Cost: ${cost}</p>
-      <p class="user-needs">Cost of Ingredients You Need: $$</p>
+      <p class="user-needs">Cost of Ingredients You Need: ${dollars}</p>
     `;
   },
 

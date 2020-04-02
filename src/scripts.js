@@ -131,8 +131,27 @@ const getRecipeInfo = (e) => {
   let foundRecipe = recipeData.find(recipe => recipe.id === parseInt(recipeCardID));
   let userPantryInfo = pantry.canUserPantryCookSelectedMeal(foundRecipe);
   let recipeCost = cookbook.calculateCost(foundRecipe);
+
+  console.log(foundRecipe);
   domUpdatesRecipeCardInfo.card(foundRecipe, userPantryInfo);
-  domUpdatesRecipeCardInfo.recipeCost(recipeCost);
+
+
+  getMissingIngredientCost(userPantryInfo, recipeCost);
+}
+
+const getMissingIngredientCost = (ingredients, recipeCost) => {
+  let dollars = ingredients.missing.reduce((acc, ingredient) => {
+    acc += ingredient.cost;
+
+    return acc;
+  }, 0);
+  dollars /= 10;
+  dollars = dollars.toLocaleString(undefined, {
+    style: "currency",
+    currency: "USD"
+  })
+
+domUpdatesRecipeCardInfo.recipeCost(dollars, recipeCost);
 }
 
 pageLoad();
