@@ -6,7 +6,7 @@ const recipesData = require('../data/recipes.js');
 
 let userData, user;
 
-describe.only('User', () => {
+describe('User', () => {
   beforeEach(() => {
     userData = usersData[17];
     user = new User(userData);

@@ -19,16 +19,18 @@ class Pantry {
           id: recipeIngredient.id,
           name: this.getIngredientNameById(recipeIngredient.id),
           amount: recipeIngredient.quantity.amount,
-          unit: recipeIngredient.quantity.unit
+          unit: recipeIngredient.quantity.unit,
+          cost: (recipeIngredient.quantity.amount * this.getIngredientCostById(recipeIngredient.id)) / 100
         });
+
       } else if (userIngredient.amount < recipeIngredient.quantity.amount) {
         response.success = false;
         response.missing.push({
           id: recipeIngredient.id,
           name: this.getIngredientNameById(recipeIngredient.id),
-
           amount: recipeIngredient.quantity.amount - userIngredient.amount,
-          unit: recipeIngredient.quantity.unit
+          unit: recipeIngredient.quantity.unit,
+          cost: ((recipeIngredient.quantity.amount - userIngredient.amount) * this.getIngredientCostById(recipeIngredient.id)) / 100
         });
       }
     });
@@ -38,6 +40,11 @@ class Pantry {
   getIngredientNameById(id) {
     let i = this.ingredientsData.find(name => name.id === id);
     return (!i) ? '' : i.name;
+  }
+
+  getIngredientCostById(id) {
+    let i = this.ingredientsData.find(cost => cost.id === id);
+    return (!i) ? '' : i.estimatedCostInCents;
   }
 }
 
