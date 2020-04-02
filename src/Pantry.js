@@ -9,7 +9,7 @@ class Pantry {
       success: true,
       missing: []
     };
-
+    
     recipe.ingredients.forEach(recipeIngredient=> {
       let userIngredient = this.pantry.find(i => recipeIngredient.id === i.ingredient);
 
@@ -34,7 +34,6 @@ class Pantry {
         });
       }
     });
-
     return response;
   }
 
@@ -53,4 +52,3 @@ class Pantry {
 if (typeof module !== 'undefined') {
   module.exports = Pantry;
 }
-

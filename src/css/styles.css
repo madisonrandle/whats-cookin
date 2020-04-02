@@ -7,7 +7,6 @@
 body {
   height: auto;
   overflow: scroll;
-
 }
 
 /* HEADERS */
@@ -37,7 +36,7 @@ h1 {
 
 h2,
 .recipe-name {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: normal;
 }
 
@@ -236,6 +235,76 @@ main {
 
 .type-checklist input {
   cursor: pointer;
+}
+
+/* RECIPE CARD INFO */
+.card-info-wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: -3.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.card-info {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  height: 35rem;
+  width: 60rem;
+}
+
+.card-info-header {
+  padding: 1rem;
+  text-align: center;
+}
+
+.card-info-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+  "top top"
+  "left right"
+  "bottom bottom";
+  grid-gap: 1rem;
+  height: 30rem;
+  margin: .5rem;
+}
+
+.recipe-cost {
+  border: .5px solid grey;
+  grid-area: top;
+  overflow: scroll;
+  padding: 1.5rem;
+}
+
+.instructions {
+  border: .5px solid grey;
+  grid-area: left;
+  overflow: scroll;
+  padding: 1rem;
+}
+
+.ingredients {
+  border: .5px solid grey;
+  grid-area: right;
+  overflow: scroll;
+  padding: 1rem;
+}
+
+.ingredients-needed-to-cook {
+  border: .5px solid grey;
+  grid-area: bottom;
+  overflow: scroll;
+  padding: 1.5rem;
+}
+
+.info-titles {
+  padding-left: .5rem;
+}
+
+.instructions-list-items,
+.ingredients-list-items,
+.items-needed-li {
+  padding: .3rem;
 }
 
 .hidden {
