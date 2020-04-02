@@ -9,7 +9,7 @@ class Pantry {
       success: true,
       missing: []
     };
-
+    
     recipe.ingredients.forEach(recipeIngredient=> {
       let userIngredient = this.pantry.find(i => recipeIngredient.id === i.ingredient);
 
@@ -18,24 +18,25 @@ class Pantry {
         response.missing.push({
           id: recipeIngredient.id,
           name: this.getIngredientNameById(recipeIngredient.id),
-          amount: recipeIngredient.quantity.amount
+          amount: recipeIngredient.quantity.amount,
+          unit: recipeIngredient.quantity.unit
         });
       } else if (userIngredient.amount < recipeIngredient.quantity.amount) {
         response.success = false;
         response.missing.push({
           id: recipeIngredient.id,
           name: this.getIngredientNameById(recipeIngredient.id),
-          amount: recipeIngredient.quantity.amount - userIngredient.amount
+
+          amount: recipeIngredient.quantity.amount - userIngredient.amount,
+          unit: recipeIngredient.quantity.unit
         });
       }
     });
-
     return response;
   }
 
   getIngredientNameById(id) {
     let i = this.ingredientsData.find(name => name.id === id);
-    
     return (!i) ? '' : i.name;
   }
 }
@@ -44,5 +45,3 @@ class Pantry {
 if (typeof module !== 'undefined') {
   module.exports = Pantry;
 }
-
-// Pantry - canPantryCookSpecifiedMeal, determineIngredientSuppyForSpecificMeal

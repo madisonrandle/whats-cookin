@@ -1,7 +1,7 @@
 let body = document.querySelector('body');
 let recipesWrapper = document.querySelector('main');
 
-let currentUser, filteredTagTypes = [];
+let cookbook, currentUser, pantry, filteredTagTypes = [];
 
 const findRandomUser = () => {
   for (let i = usersData.length - 1; i > 0; i--) {
@@ -13,12 +13,15 @@ const findRandomUser = () => {
 
 const pageLoad = () => {
   let usersData = findRandomUser();
+  cookbook = new Cookbook(recipeData, ingredientsData);
   currentUser = new User(usersData);
+  pantry = new Pantry(currentUser.userData.pantry, ingredientsData);
   domUpdatesHeader.userName(usersData);
   domUpdatesHomePage.search();
   domUpdatesHomePage.filter();
   domUpdatesHomePage.recipes(currentUser);
 }
+
 
 const getRecipeTypes = () => {
   return recipeData.reduce((acc, recipe) => {
@@ -108,17 +111,28 @@ const getSearchInput = (e) => {
     });
     return acc;
   }, []);
+
   domUpdatesHomePage.searchResults(filteredRecipesBySearchInput);
 }
 
 const getFavoritesSearchInput = (e) => {
   const filteredSearchInput = e.target.nextElementSibling.value;
   filteredRecipesBySearchInput = currentUser.findFavorites(filteredSearchInput);
+
   domUpdatesFavoritesPage.searchResults(filteredRecipesBySearchInput);
 }
 
 const getThisWeekSearchInput = (e) => {
   const filteredSearchInput = e.target.nextElementSibling.value;
+}
+
+const getRecipeInfo = (e) => {
+  let recipeCardID = e.target.closest('.recipe-card').id;
+  let foundRecipe = recipeData.find(recipe => recipe.id === parseInt(recipeCardID));
+  let userPantryInfo = pantry.canUserPantryCookSelectedMeal(foundRecipe);
+  let recipeCost = cookbook.calculateCost(foundRecipe);
+  domUpdatesRecipeCardInfo.card(foundRecipe, userPantryInfo);
+  domUpdatesRecipeCardInfo.recipeCost(recipeCost);
 }
 
 pageLoad();
@@ -135,6 +149,7 @@ const eventHandler = (e) => {
       domUpdatesCookThisWeekPage.subHeader(e);
       domUpdatesCookThisWeekPage.recipesToCook(e, currentUser);
   } else if (e.target.classList.contains('home-button')) {
+      domUpdatesHomePage.search(e);
       domUpdatesHomePage.filter(currentUser, e);
       domUpdatesHomePage.recipes(currentUser, e);
   } else if (e.target.classList.contains('handle-users-data')) {
@@ -161,6 +176,8 @@ const eventHandler = (e) => {
       getFavoritesSearchInput(e);
   } else if (e.target.classList.contains('search-icon-this-week')) {
       getThisWeekSearchInput(e);
+  } else if (e.target.classList.contains('recipe-image')) {
+      getRecipeInfo(e);
   }
 }
 
