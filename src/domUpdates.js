@@ -153,7 +153,7 @@ const domUpdatesHomePage = {
               </section>
             </article>
           `);
-        };
+        }
       });
     });
   },
@@ -376,7 +376,7 @@ const domUpdatesRecipeCardInfo = {
         let amount = ingredientInfo.quantity.amount;
         if (!Number.isInteger(amount)) {
           amount = amount.toFixed(1);
-        };
+        }
         ingredient.id === ingredientInfo.id &&
           ingredientsWrapper.lastElementChild.insertAdjacentHTML('afterbegin', `
             <li class="ingredients-list-items">${amount} ${ingredientInfo.quantity.unit} ${ingredient.name}</li>
@@ -401,7 +401,7 @@ const domUpdatesRecipeCardInfo = {
         let amount = item.amount;
         if (!Number.isInteger(amount)) {
           amount = amount.toFixed(1);
-        };
+        }
         ingredientsNeededWrapper.lastElementChild.insertAdjacentHTML('afterbegin', `
           <li class="items-needed-li">${amount} ${item.unit} ${item.name}</li>
         `);

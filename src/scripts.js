@@ -66,7 +66,7 @@ const getAllFilteredRecipes = (e) => {
     recipeData.forEach(recipe => {
       if (recipe.tags.includes(tag) && !acc.includes(recipe)) {
         acc.push(recipe);
-      };
+      }
     });
     return acc.sort((a, b) => a.id - b.id);
   }, []);
@@ -106,7 +106,7 @@ const getSearchInput = (e) => {
       ingredientsData.forEach(ingredientData => {
         if (ingredient.id === ingredientData.id && ingredientData.name.includes(filteredSearchInput) && !acc.includes(recipe)) {
           acc.push(recipe);
-        };
+        }
       });
     });
     return acc;
