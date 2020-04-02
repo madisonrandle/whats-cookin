@@ -23,22 +23,15 @@ This is one of our Pair Projects during our time at [Turing School of Software a
 
 ## App Screenshots
 ### Home Page
-![Screen-Shot.png](home page link will go here)
-### Another Page
-![Screen-Shot.png](home page link will go here)
-### Another Page
-![Screen-Shot.png](home page link will go here)
-
-## Animation
-### [specific app page] Animation
-![project gif](gif link will go here)
-
-![project gif](gif link will go here)
-
-### [specific app page] Animation
-![project gif](gif link will go here)
-
-![project gif](gif link will go here)
+![Screen-Shot.png](https://user-images.githubusercontent.com/54754467/78262927-86a83400-74be-11ea-9b79-a431ec949260.png)
+### Recieps to Cook Page
+![Screen-Shot.png](https://user-images.githubusercontent.com/54754467/78262973-958ee680-74be-11ea-8360-9840e08caecb.png)
+### Recipe Instructions
+![Clicked Recipe](https://user-images.githubusercontent.com/54754467/78262972-958ee680-74be-11ea-8682-79d7ed2b23e1.png)
+### Fabulous Filter Feature
+![Clicked Recipe](https://user-images.githubusercontent.com/54754467/78262940-8c057e80-74be-11ea-9005-0bd642f803a2.png)
+### Favorited Recipes
+![Sceenshot](https://user-images.githubusercontent.com/54754467/78262935-890a8e00-74be-11ea-847b-cabb63ff9be9.png)
 
 ## Project Next Steps
-Anything we didn't get to and want to implement on the project will go here.
+Checkout out the issues tab to see some next steps that we would like to accomplish for this project!
