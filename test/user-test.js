@@ -38,13 +38,13 @@ describe.only('User', () => {
   });
 
   it('Should add and remove objects from an array of favorite recipes', () => {
-  user.addRecipeToFavorites(recipesData[0]);
-  user.addRecipeToFavorites(recipesData[1]);
+    user.addRecipeToFavorites(recipesData[0]);
+    user.addRecipeToFavorites(recipesData[1]);
 
-  expect(user.favoriteRecipes).to.deep.equal([recipesData[0], recipesData[1]]);
+    expect(user.favoriteRecipes).to.deep.equal([recipesData[0], recipesData[1]]);
 
-  user.removeRecipeFromFavorites(recipesData[0]);
-  expect(user.favoriteRecipes).to.deep.equal([recipesData[1]]);
+    user.removeRecipeFromFavorites(recipesData[0]);
+    expect(user.favoriteRecipes).to.deep.equal([recipesData[1]]);
   });
 
   it('Should store a list of saved recipes', () => {
@@ -53,13 +53,13 @@ describe.only('User', () => {
   });
 
   it('Should add and remove objects from an array of saved recipes', () => {
-  user.saveRecipeToCook(recipesData[0]);
-  user.saveRecipeToCook(recipesData[1]);
+    user.saveRecipeToCook(recipesData[0]);
+    user.saveRecipeToCook(recipesData[1]);
 
-  expect(user.recipesToCook).to.deep.equal([recipesData[0], recipesData[1]]);
+    expect(user.recipesToCook).to.deep.equal([recipesData[0], recipesData[1]]);
 
-  user.removeRecipeToCook(recipesData[0]);
-  expect(user.recipesToCook).to.deep.equal([recipesData[1]]);
+    user.removeRecipeToCook(recipesData[0]);
+    expect(user.recipesToCook).to.deep.equal([recipesData[1]]);
   });
 
   it('Should be able to filter recipes by tag', () => {
@@ -73,8 +73,5 @@ describe.only('User', () => {
 
     expect(user.findFavorites('Chocolate')).to.deep.equal([recipesData[0]]);
   });
-
-
-
-
+  
 });

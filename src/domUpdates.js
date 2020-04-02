@@ -335,22 +335,22 @@ const domUpdates = {
 }
 
 const domUpdatesRecipeCardInfo = {
- card: (recipe, pantry) => {
-   main.innerHTML = '';
-   main.nextElementSibling.classList.remove('hidden');
-   instructionsWrapper.innerHTML = '';
-   ingredientsWrapper.innerHTML = '';
-   instructionsWrapper.parentElement.parentElement.firstElementChild.innerHTML = '';
-   instructionsWrapper.parentElement.parentElement.firstElementChild.insertAdjacentHTML('afterbegin', `
+  card: (recipe, pantry) => {
+    main.innerHTML = '';
+    main.nextElementSibling.classList.remove('hidden');
+    instructionsWrapper.innerHTML = '';
+    ingredientsWrapper.innerHTML = '';
+    instructionsWrapper.parentElement.parentElement.firstElementChild.innerHTML = '';
+    instructionsWrapper.parentElement.parentElement.firstElementChild.insertAdjacentHTML('afterbegin', `
      <h2 class="card-info-header">${recipe.name}</h2>
    `);
 
-   instructionsWrapper.insertAdjacentHTML('afterbegin', `
+    instructionsWrapper.insertAdjacentHTML('afterbegin', `
       <p class="info-titles">Instructions</p>
       <ol class="instructions-list"></ol>
    `);
 
-   ingredientsWrapper.insertAdjacentHTML('afterbegin', `
+    ingredientsWrapper.insertAdjacentHTML('afterbegin', `
       <p class="info-titles">Ingredients</p>
       <ul class="ingredients-list"></ul>
    `);
@@ -437,9 +437,9 @@ const domUpdatesHandler = {
     if (e.target.classList.contains('handle-favorites')) {
       domUpdates.removeRecipeCard(e);
     } else if (e.target.classList.contains('remove-recipe-icon')) {
-        domUpdates.removeRecipeCard(e);
+      domUpdates.removeRecipeCard(e);
     } else if (e.target.classList.contains('favorite-recipe-icon-active')) {
-        domUpdates.favoriteButton(e);
+      domUpdates.favoriteButton(e);
     }
   },
 }
