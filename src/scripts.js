@@ -151,7 +151,7 @@ const getMissingIngredientCost = (ingredients, recipeCost) => {
     currency: "USD"
   })
 
-domUpdatesRecipeCardInfo.recipeCost(dollars, recipeCost);
+  domUpdatesRecipeCardInfo.recipeCost(dollars, recipeCost);
 }
 
 pageLoad();
