@@ -39,15 +39,14 @@ describe.only('Pantry', () => {
 
   it('should show the missing ingredient and amount required to make the specific recipe', () => {
     let recipe1 = recipeData[0];
-    console.log(pantry.canUserPantryCookSelectedMeal(recipe1))
     let response = pantry.canUserPantryCookSelectedMeal(recipe1);
     expect(response).to.deep.equal({
       success: false,
       missing: [
         { id: 19206, name: 'instant vanilla pudding', amount: 1, unit: 'Tbsp', cost: 6.6 },
-        { id: 19334, name: 'brown sugar', amount: 0.5, unit: 'c', cost: 56 },
-        { id: 1012047, name: 'fine sea salt', amount: 24, unit: 'servings', cost: 56 },
-        { id: 10019903, name: 'semi sweet chips', amount: 2, unit: 'c', cost: '' }
+        { id: 19334, name: 'brown sugar', amount: 0.5, unit: 'c', cost: 2.795 },
+        { id: 1012047, name: 'fine sea salt', amount: 24, unit: 'servings', cost: 126.72 },
+        { id: 10019903, name: 'semi sweet chips', amount: 2, unit: 'c', cost: 5.06 }
       ]
     });
 
