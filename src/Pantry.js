@@ -9,6 +9,7 @@ class Pantry {
       success: true,
       missing: []
     };
+    
     recipe.ingredients.forEach(recipeIngredient=> {
       let userIngredient = this.pantry.find(i => recipeIngredient.id === i.ingredient);
 
@@ -25,6 +26,7 @@ class Pantry {
         response.missing.push({
           id: recipeIngredient.id,
           name: this.getIngredientNameById(recipeIngredient.id),
+
           amount: recipeIngredient.quantity.amount - userIngredient.amount,
           unit: recipeIngredient.quantity.unit
         });
@@ -35,7 +37,6 @@ class Pantry {
 
   getIngredientNameById(id) {
     let i = this.ingredientsData.find(name => name.id === id);
-
     return (!i) ? '' : i.name;
   }
 }
