@@ -5383,7 +5383,7 @@ const recipeData = [
   },
   {
     "id": 605132565,
-    "image": "https://spoonacular.com/recipeImages/605132-556x370.jpg",
+    "image": "https://webknox.com/recipeImages/636458-556x370.jpg",
     "ingredients": [
       {
         "id": 1123,
