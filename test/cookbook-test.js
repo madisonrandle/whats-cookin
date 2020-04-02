@@ -21,11 +21,10 @@ describe('Cookbook', () => {
     expect(cookbook).to.be.an.instanceof(Cookbook);
   });
 
-  //cookbook.ingredientData
   describe('cookbook.ingredientData', () => {
     
     it('should have an array of all ingredients', () => {
-      // console.log(cookbook)
+     
       expect(cookbook.ingredients).to.be.a('array');
     });
 
@@ -42,7 +41,6 @@ describe('Cookbook', () => {
     });
   })
 
-  //cookbook.recipeData
   describe('cookbook.recipeData', () => {
     
     it('should have an array of all recipes', () => {
@@ -98,7 +96,3 @@ describe('Cookbook', () => {
    
   });
 })
-
-
-
-// Cookbook - calculateCost and findRecipe
