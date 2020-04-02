@@ -40,14 +40,14 @@ const updateUsersFavorites = (e) => {
   let foundRecipe = recipeData.find(recipe => recipe.id === findRecipeID(e));
   !e.target.classList.contains('favorite-recipe-icon-inactive') ?
     currentUser.addRecipeToFavorites(foundRecipe) :
-      currentUser.removeRecipeFromFavorites(foundRecipe);
+    currentUser.removeRecipeFromFavorites(foundRecipe);
 }
 
 const updateUsersRecipesThisWeek = (e) => {
   let foundRecipe = recipeData.find(recipe => recipe.id === findRecipeID(e));
   !currentUser.recipesToCook.includes(foundRecipe) ?
     currentUser.saveRecipeToCook(foundRecipe) :
-      currentUser.removeRecipeToCook(foundRecipe);
+    currentUser.removeRecipeToCook(foundRecipe);
 }
 
 const getFilteredTagTypes = (e) => {
@@ -66,9 +66,9 @@ const getAllFilteredRecipes = (e) => {
     recipeData.forEach(recipe => {
       if (recipe.tags.includes(tag) && !acc.includes(recipe)) {
         acc.push(recipe);
-      };
+      }
     });
-  return acc.sort((a, b) => a.id - b.id);
+    return acc.sort((a, b) => a.id - b.id);
   }, []);
   domUpdatesHomePage.filterResults();
   domUpdatesHomePage.filter();
@@ -106,7 +106,7 @@ const getSearchInput = (e) => {
       ingredientsData.forEach(ingredientData => {
         if (ingredient.id === ingredientData.id && ingredientData.name.includes(filteredSearchInput) && !acc.includes(recipe)) {
           acc.push(recipe);
-        };
+        }
       });
     });
     return acc;
@@ -151,7 +151,7 @@ const getMissingIngredientCost = (ingredients, recipeCost) => {
     currency: "USD"
   })
 
-domUpdatesRecipeCardInfo.recipeCost(dollars, recipeCost);
+  domUpdatesRecipeCardInfo.recipeCost(dollars, recipeCost);
 }
 
 pageLoad();
@@ -163,40 +163,40 @@ const eventHandler = (e) => {
     domUpdatesFavoritesPage.subHeader(e);
     domUpdatesFavoritesPage.favoriteRecipes(e, currentUser);
   } else if (e.target.classList.contains('this-week-button')) {
-      domUpdatesCookThisWeekPage.search(e);
-      domUpdatesCookThisWeekPage.filter(e);
-      domUpdatesCookThisWeekPage.subHeader(e);
-      domUpdatesCookThisWeekPage.recipesToCook(e, currentUser);
+    domUpdatesCookThisWeekPage.search(e);
+    domUpdatesCookThisWeekPage.filter(e);
+    domUpdatesCookThisWeekPage.subHeader(e);
+    domUpdatesCookThisWeekPage.recipesToCook(e, currentUser);
   } else if (e.target.classList.contains('home-button')) {
-      domUpdatesHomePage.search(e);
-      domUpdatesHomePage.filter(currentUser, e);
-      domUpdatesHomePage.recipes(currentUser, e);
+    domUpdatesHomePage.search(e);
+    domUpdatesHomePage.filter(currentUser, e);
+    domUpdatesHomePage.recipes(currentUser, e);
   } else if (e.target.classList.contains('handle-users-data')) {
-      updateUsersFavorites(e);
+    updateUsersFavorites(e);
   } else if (e.target.classList.contains('handle-recipes-this-week')) {
-      updateUsersRecipesThisWeek(e);
+    updateUsersRecipesThisWeek(e);
   } else if (e.target.classList.contains('checkbox')) {
-      getFilteredTagTypes(e);
+    getFilteredTagTypes(e);
   } else if (e.target.classList.contains('filter-all-recipes-by-type-button')) {
-      getAllFilteredRecipes(e);
+    getAllFilteredRecipes(e);
   } else if (e.target.classList.contains('filter-all-recipes-button')) {
-      domUpdatesTagTypeListItems.allRecipes(e, getRecipeTypes());
+    domUpdatesTagTypeListItems.allRecipes(e, getRecipeTypes());
   } else if (e.target.classList.contains('filter-favorite-recipes-button')) {
-      domUpdatesTagTypeListItems.favoriteRecipes(e, getRecipeTypes());
+    domUpdatesTagTypeListItems.favoriteRecipes(e, getRecipeTypes());
   } else if (e.target.classList.contains('filter-this-week-recipes-button')) {
-      domUpdatesTagTypeListItems.thisWeekRecipes(e, getRecipeTypes());
+    domUpdatesTagTypeListItems.thisWeekRecipes(e, getRecipeTypes());
   } else if (e.target.classList.contains('filter-favorite-recipes-by-type-button')) {
-      getFavoriteFilteredRecipes(e);
+    getFavoriteFilteredRecipes(e);
   } else if (e.target.classList.contains('filter-this-week-recipes-by-type-button')) {
-      getToCookThisWeekFilteredRecipes(e);
+    getToCookThisWeekFilteredRecipes(e);
   } else if (e.target.classList.contains('search-icon-home')) {
-      getSearchInput(e);
+    getSearchInput(e);
   } else if (e.target.classList.contains('search-icon-favorites')) {
-      getFavoritesSearchInput(e);
+    getFavoritesSearchInput(e);
   } else if (e.target.classList.contains('search-icon-this-week')) {
-      getThisWeekSearchInput(e);
+    getThisWeekSearchInput(e);
   } else if (e.target.classList.contains('recipe-image')) {
-      getRecipeInfo(e);
+    getRecipeInfo(e);
   }
 }
 
